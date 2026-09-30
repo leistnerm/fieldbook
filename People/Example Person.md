@@ -11,10 +11,15 @@ location: Remote
 timezone: America/New_York
 hireDate: 2022-10-03
 birthday: 1900-10-14
+employeeNumber:
 workEmail: example.person@example.com
 workPhone:
-personalEmail:
-personalPhone:
+workMobile:
+otherEmails: []
+otherPhones: []
+addresses: []
+usernames: ["jira: example.person"]
+supports: ["Platform API"]
 ---
 ## Family
 - Partner: Sam

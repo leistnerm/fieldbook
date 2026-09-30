@@ -1,7 +1,7 @@
 // Creates a People/<Name>.md note (from Templates/Person.md) for any person
 // linked in a frontmatter people field that has no note yet. If the name could
-// be an existing person ("John Smith" when "John Smith (Acme)" or an alias
-// exists), it warns instead of creating. Plain code, no model calls. Runs only
+// be an existing person ("John Smith" when "John Smith (Acme)", an alias or a
+// username exists), it warns instead of creating. Plain code, no model calls. Runs only
 // while opencode is open. Delete this file to disable.
 import { readdir, readFile, writeFile } from "node:fs/promises"
 import path from "node:path"
@@ -68,6 +68,12 @@ function personLinks(fm) {
 // "John Smith (Acme)" -> "john smith"
 const baseName = (name) => name.replace(/\s*\([^)]*\)\s*$/, "").trim().toLowerCase()
 
+// "jira: jsmith" or "windows: CORP\\\\jsmith" -> "jsmith" (and the whole value)
+function usernameKeys(entry) {
+  const v = entry.replace(/^[^:]*:\s*/, "").replace(/\\\\/g, "\\").trim().toLowerCase()
+  return [v, v.split("\\").pop()].filter(Boolean)
+}
+
 // `warned` persists between scans so each warning shows once per opencode run.
 async function scan(directory, notify, warned = new Set()) {
   const files = await listMarkdown(directory)
@@ -75,12 +81,12 @@ async function scan(directory, notify, warned = new Set()) {
   const texts = new Map()
   for (const f of files) texts.set(f, frontmatter(await readFile(path.join(directory, f), "utf8")))
 
-  // Every name a person note answers to: its base name and its aliases.
+  // Every name a person note answers to: its base name, aliases and usernames.
   const people = []
   for (const [f, fm] of texts) {
     if (!field(fm, "tags").includes("person")) continue
     const name = path.basename(f, ".md")
-    people.push({ name, keys: new Set([baseName(name), ...field(fm, "aliases").map(baseName)]) })
+    people.push({ name, keys: new Set([baseName(name), ...field(fm, "aliases").map(baseName), ...field(fm, "usernames").flatMap(usernameKeys)]) })
   }
   const candidates = (key) => people.filter((p) => p.keys.has(key) && p.name.toLowerCase() !== key)
 

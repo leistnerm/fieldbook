@@ -26,6 +26,7 @@ same thing.
 | decision records | `tags` include `decision`         | `Decisions/YYYY-MM-DD <Short title>.md` |
 | projects         | `tags` include `project`          | `Projects/<Name>.md`         |
 | research         | `tags` include `research`         | `Research/<Title>.md`        |
+| reference notes | `tags` include `reference`        | `Reference/<Title>.md`       |
 | inbox            | `Inbox.md` (one line per capture) | appended by the user's hotkey; only /inbox removes lines |
 | reports          | —                                 | `Reports/`                   |
 | reviews          | `tags` include `review`           | `Reports/Reviews/<Person> - YYYY-MM <mid-year\|year-end> review.md` |
@@ -231,6 +232,35 @@ Next, Log (dated, append-only).
   line. Never delete a note, and never delete a dropped one — a dead end is
   still a result.
 
+## Reference notes
+
+Things the user found and wants to find again: how-tos, queries, request
+instructions. One note per finding, in `Reference/`, from
+`Templates/Reference.md` (`/learn`, or Ctrl+Shift+M).
+
+```yaml
+tags: [reference]
+kind: how-to           # how-to | query | instructions | other
+systems: []            # names, reused from people's `supports` where they match
+verified: YYYY-MM-DD   # when the user last confirmed it still works
+source:                # where it came from (optional)
+```
+
+Body: Summary (one line: what it is, when to use it), Details, Log (dated,
+append-only).
+
+- Details hold the user's own words. Put queries and commands in code blocks
+  exactly as given; never add steps, fix, or improve them; mark gaps with `?`.
+- Never store a password, token or key. If the input has one, leave it out and
+  say so.
+- Set `verified` only when the user says they confirmed it; when they do,
+  update it and add a Log line.
+- One note per finding: before making one, look for an existing note on the
+  same thing and offer to update it instead.
+- Who supports a system is not a Reference note; it goes in the person's
+  `supports`.
+- Never delete a note; if it is obsolete, say so in its Log.
+
 ## Decision records
 
 For decisions important enough to need a full record. Created only when the user
@@ -273,10 +303,15 @@ location:
 timezone:
 hireDate:            # YYYY-MM-DD (drives work anniversaries)
 birthday:            # YYYY-MM-DD; year 1900 = year unknown
+employeeNumber:      # text, quoted, so leading zeros survive
 workEmail:
 workPhone:
-personalEmail:
-personalPhone:
+workMobile:
+otherEmails: []      # "label: value", e.g. "personal: a@example.com"
+otherPhones: []      # "personal mobile: 555-0102"
+addresses: []        # "personal: 2 Oak Ave, Springfield"
+usernames: []        # "system: name", e.g. "jira: jsmith"
+supports: []         # systems they support, e.g. ["LDAP", "SSO"]
 ```
 
 Body sections: Family, Personal notes, Job history (table), Goals &
@@ -285,6 +320,14 @@ embeds.
 
 - Only record personal details the user gives you. Never guess or fill in
   family, contact, or date fields from anywhere else.
+- `otherEmails`, `otherPhones`, `addresses` and `usernames` are lists of
+  `"label: value"` strings. A value given without a label: ask for the
+  label. Reuse the label spellings already in the vault (`personal`,
+  `personal mobile`, `home`, `jira`); never guess one.
+- `supports` holds system names. Reuse the spelling already used in any
+  person's `supports` or any Reference note's `systems`; ask before adding a
+  new spelling. "Who supports X?" is answered from `supports` (ignore
+  case), then point to Reference notes whose `systems` include X.
 - Feedback & recognition is dated and append-only, like a task log.
 - Goals go under a `### Goals YYYY` heading in Goals & development, one per
   line. They're set per person, per year, and usually few. A new year gets

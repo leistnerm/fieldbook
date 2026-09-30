@@ -36,4 +36,4 @@
 Board, by-project, by-type, by-tag, recurring and date-range views: open
 [[TaskNotes/Views/Dashboard.base]]. Team directory: [[TaskNotes/Views/People.base]].
 Projects: [[TaskNotes/Views/Projects.base]]. Decisions: [[TaskNotes/Views/Decisions.base]].
-Reviews: [[TaskNotes/Views/Reviews.base]]. Research: [[TaskNotes/Views/Research.base]]. Inbox: [[Inbox]] (`/inbox` to sort).
+Reviews: [[TaskNotes/Views/Reviews.base]]. Research: [[TaskNotes/Views/Research.base]]. Reference: [[TaskNotes/Views/Reference.base]]. Inbox: [[Inbox]] (`/inbox` to sort).

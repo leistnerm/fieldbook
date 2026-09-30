@@ -41,9 +41,13 @@ you don't delete just shows up in the `/` list; it does no harm.
 
 **People**
 - What: one note per person: company, team, manager, birthday, hire date,
+  employee number, work email and phones, other emails, phones and
+  addresses, usernames on other systems, the systems they support,
   goals by year, feedback, plus live lists of their tasks, meetings and
   reviews. Handles two people with the same name. Notes are created for you
-  when you link a new name.
+  when you link a new name. A username ("jira: jsmith") also counts as a
+  name for that person, so a stray `[[jsmith]]` warns instead of creating a
+  duplicate note.
 - Files: `People/`, `Templates/Person.md`, `Person.base`, `People.base`,
   `.opencode/plugins/auto-people.js`.
 - Remove the auto-creation only: delete `auto-people.js`.
@@ -140,6 +144,15 @@ you don't delete just shows up in the `/` list; it does no harm.
   Log line, and a project page shows its linked research.
 - Files: `Research/`, `Templates/Research.md`, `Research.base`.
 
+**Reference notes**
+- What: one note per thing you found and want to find again: a how-to,
+  a query, request instructions. `/learn` files it from what you paste; each
+  has a kind, the systems it's about and a date you last verified it. Who
+  supports which system lives on the person (`supports`), not in a note.
+  Never store passwords or tokens in one.
+- Files: `Reference/`, `Templates/Reference.md`, `Reference.base`,
+  `.opencode/commands/learn.md`.
+
 **Quick capture and inbox**
 - What: Ctrl+Alt+I from any app opens a one-line box; the text goes to
   `Inbox.md`. `/inbox` later sorts each line into a task, person note,
@@ -168,7 +181,7 @@ you don't delete just shows up in the `/` list; it does no harm.
 - Only tasks: Core + Projects. Delete the rest of the folders and commands.
 - Tasks + meetings: add Meetings, Recurring meetings, Decisions, Transcripts.
 - Managers: add People, Team management, Reviews.
-- Anything else stands alone; Research and Quick capture need only the Core.
+- Anything else stands alone; Research, Reference notes and Quick capture need only the Core.
 
 To add your own kind of note: a folder, a template, a section in `AGENTS.md`
 saying where it lives and which fields it has, and optionally a `.base` view

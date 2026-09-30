@@ -11,10 +11,15 @@ location:
 timezone:
 hireDate:
 birthday:
+employeeNumber:
 workEmail:
 workPhone:
-personalEmail:
-personalPhone:
+workMobile:
+otherEmails: []
+otherPhones: []
+addresses: []
+usernames: []
+supports: []
 ---
 ## Family
 - Partner:

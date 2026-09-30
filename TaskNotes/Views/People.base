@@ -25,6 +25,7 @@ views:
       - manager
       - location
       - workEmail
+      - workMobile
 
   - type: table
     name: By company
@@ -40,6 +41,22 @@ views:
       - team
       - relationship
       - workEmail
+
+  - type: table
+    name: Supports
+    filters:
+      and:
+        - 'status != "former"'
+        - '!supports.isEmpty()'
+    order:
+      - file.name
+      - supports
+      - team
+      - workEmail
+      - workMobile
+    sort:
+      - property: file.name
+        direction: ASC
 
   - type: table
     name: My team

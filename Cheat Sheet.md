@@ -32,6 +32,7 @@ date is 2021-03-01", "what's blocked on Raj?").
 | `/status-update` | draft the weekly status update | `/status-update` |
 | `/report` | what got done in a range | `/report 2026-07-01 2026-09-30` · `/report 2026-07-01 2026-09-30 Alice` |
 | `/triage` | find overdue, blocked, stale, broken items | `/triage` |
+| `/learn` | file something you found (how-to, query, instructions) as a Reference note, or record who supports a system | `/learn to find the server locking an account: <query>` · `/learn Alice supports LDAP and SSO` |
 | `/inbox` | sort captured lines one at a time into tasks, people, meetings, projects | `/inbox` |
 | `/transcript` | turn a Teams transcript into meeting notes: attendees, decisions, actions, commitments | `/transcript` · `/transcript platform sync` |
 | `/review` | draft a mid-year or year-end review / self-assessment in the company form | `/review Alice mid-year` · `/review me year-end` |
@@ -176,6 +177,14 @@ in `Research/`. Set `kind` (research or experiment), `question`, then `status`:
 and Findings as you go, and add dated Log lines. Ideas captured in the inbox
 become `idea` notes via `/inbox`. Active ones show on the Dashboard; all of
 them in [[TaskNotes/Views/Research.base]].
+
+**Reference notes** — things you found and want back later. `/learn <what
+you found>`, or **Ctrl+Shift+M** → *Reference*. One note per finding in
+`Reference/`, with a `kind` (how-to, query, instructions), the `systems` it's
+about and `verified` (when you last confirmed it). Find them in
+[[TaskNotes/Views/Reference.base]] or ask opencode. "Who supports LDAP?"
+reads the `supports` list on people; the People view *Supports* shows it.
+Never put passwords or tokens in a note.
 
 **Look back** — `/report <from> <to>`, or the *Done in range* view in
 Dashboard.base (edit its two dates).

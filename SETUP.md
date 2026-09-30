@@ -47,7 +47,7 @@ Transcripts/           Teams transcripts for /transcript (raw .vtt never in git;
 .git                   one-line pointer to the history outside OneDrive
 ```
 
-Note folders (People, Meetings, Decisions, Projects, Research, TaskNotes/Tasks)
+Note folders (People, Meetings, Decisions, Projects, Research, Reference, TaskNotes/Tasks)
 and how notes are found: see the "Where things live" table in `AGENTS.md`.
 
 Rule of thumb: `TaskNotes/` holds what TaskNotes reads; everything you write
@@ -375,6 +375,8 @@ Open the example notes (`People/Example Person.md`, the two example meetings,
     `Test` should land in `Research/` with status `idea`. Set `status:
     active`: it should appear under "Research and experiments in progress"
     on the Dashboard (reopen the Dashboard if it doesn't update). Delete it.
+    Reference works the same: pick *Reference*, type "Test"; the note lands in
+    `Reference/`, and shows in `Reference.base`. Delete it.
 19. Recurrence format (do this early — the example task depends on it). In
     TaskNotes, create a task "Test recurring" repeating weekly on Fridays
     through its own form. Open the new file and look at its `recurrence` line. Then open `Send weekly

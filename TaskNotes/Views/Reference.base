@@ -1,0 +1,58 @@
+filters:
+  and:
+    - file.hasTag("reference")
+    - '!file.inFolder("Templates")'
+
+views:
+  - type: table
+    name: All
+    order:
+      - file.name
+      - kind
+      - systems
+      - verified
+      - source
+    sort:
+      - property: file.name
+        direction: ASC
+
+  - type: table
+    name: How-tos
+    filters:
+      and:
+        - 'kind == "how-to" || kind == "instructions"'
+    order:
+      - file.name
+      - systems
+      - verified
+    sort:
+      - property: file.name
+        direction: ASC
+
+  - type: table
+    name: Queries
+    filters:
+      and:
+        - 'kind == "query"'
+    order:
+      - file.name
+      - systems
+      - verified
+    sort:
+      - property: file.name
+        direction: ASC
+
+  - type: table
+    name: Not verified in a year
+    filters:
+      and:
+        - '!verified.isEmpty()'
+        - 'date(verified) < today() - "365d"'
+    order:
+      - file.name
+      - kind
+      - systems
+      - verified
+    sort:
+      - property: verified
+        direction: ASC
