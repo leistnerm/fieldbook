@@ -18,7 +18,7 @@ Follow AGENTS.md → Reference notes and People.
    offer to update it (add to Details, add a Log line) instead of duplicating.
 4. Otherwise create `Reference/<Title>.md` from `Templates/Reference.md`, with
    a short specific title ("Reset a locked AD account"). Summary is one line
-   from the user's words. Details hold what they gave you, with queries and
+   from the user's words. Leave `verified` empty. Details hold what they gave you, with queries and
    commands in code blocks unchanged. Add nothing they didn't say.
 5. A password, token or key in the input: leave it out of the note and tell
    the user it was left out.

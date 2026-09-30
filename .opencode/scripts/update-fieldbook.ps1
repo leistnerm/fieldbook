@@ -69,13 +69,16 @@ try {
   if (-not $old) { "No earlier manifest here, so every file that differs is treated as edited and saved as .fieldbook-new." }
 
   # ---- files
-  $add = @(); $replace = @(); $conflict = @(); $same = 0
+  $add = @(); $replace = @(); $conflict = @(); $same = 0; $removed = @()
   foreach ($p in $new.files.PSObject.Properties) {
     $rel = $p.Name; $newHash = "$($p.Value)"
     $srcFile = Join-Path $kit $rel
     if (-not (Test-Path -LiteralPath $srcFile)) { throw "The manifest lists a file the release lacks: $rel" }
     $dest = Join-Path $vault $rel
-    if (-not (Test-Path -LiteralPath $dest)) { $add += $rel; continue }
+    if (-not (Test-Path -LiteralPath $dest)) {
+      if ($old -and $old.files.PSObject.Properties[$rel]) { $removed += $rel } else { $add += $rel }
+      continue
+    }
     $destHash = Get-Hash $dest
     if ($destHash -eq $newHash) { $same++; continue }
     $oldHash = $null
@@ -139,6 +142,7 @@ try {
             $fm.RemoveAt($i); $fm.Add("$($op.to): [$entry]")
           } else {
             $rest = Get-Rest $fm[$t]
+            if ($rest -eq "" -and $t + 1 -lt $fm.Count -and $fm[$t + 1] -match ^\s*-) { $manual += "$($op.from) has a value but $($op.to) is written as a block list; move it by hand"; break }
             if ($rest -eq "" -or $rest -eq "[]") { $fm[$t] = "$($op.to): [$entry]" }
             elseif ($rest -match '^\[(.*)\]$') { $fm[$t] = "$($op.to): [$($Matches[1]), $entry]" }
             else { $manual += "$($op.from) has a value but $($op.to) is written as a block list; move it by hand"; break }
@@ -153,14 +157,15 @@ try {
     @{ text = $out; changes = $changes; skipped = $skipped; manual = $manual }
   }
 
-  $edits = @()   # @{ path; text; mig }
+  $current = @{}   # path -> note text after the migrations so far; each note is written once
   $report = @()
   foreach ($mig in $pending) {
     $touched = 0; $skippedNotes = 0; $manualLines = @()
     foreach ($n in $notes) {
-      $r = Edit-Note (Read-Text $n.FullName) $mig
+      $src = if ($current.ContainsKey($n.FullName)) { $current[$n.FullName] } else { Read-Text $n.FullName }
+      $r = Edit-Note $src $mig
       if (-not $r) { continue }
-      if ($r.changes.Count) { $touched++; $edits += @{ path = $n.FullName; text = $r.text } }
+      if ($r.changes.Count) { $touched++; $current[$n.FullName] = $r.text }
       if ($r.skipped) { $skippedNotes++ }
       foreach ($mm in $r.manual) { $manualLines += "$($n.Name): $mm" }
     }
@@ -175,6 +180,7 @@ try {
   "Replace, unchanged by you ($($replace.Count)):"; $replace | ForEach-Object { "  ~ $_" }
   "Edited by you, new copy saved as .fieldbook-new ($($conflict.Count)):"; $conflict | ForEach-Object { "  ! $_" }
   "Already current: $same file(s)"
+  if ($removed.Count) { "Deleted by you, not re-added ($($removed.Count)):"; $removed | ForEach-Object { "  x $_" } }
   if ($gone.Count) { "No longer in fieldbook (left in place; delete if you don't use them):"; $gone | ForEach-Object { "  - $_" } }
   if ($report.Count) { ""; $report }
 
@@ -208,7 +214,7 @@ try {
     Copy-Item -LiteralPath (Join-Path $kit $rel) -Destination $dest -Force
   }
   foreach ($rel in $conflict) { Copy-Item -LiteralPath (Join-Path $kit $rel) -Destination ((Join-Path $vault $rel) + ".fieldbook-new") -Force }
-  foreach ($e in $edits) { [IO.File]::WriteAllText($e.path, $e.text, $utf8) }
+  foreach ($k in $current.Keys) { [IO.File]::WriteAllText($k, $current[$k], $utf8) }
   Copy-Item -LiteralPath $mf.FullName -Destination $oldPath -Force
   $ids = @($applied) + @($pending | ForEach-Object { $_.id })
   $json = '{"version":"' + $new.version + '","migrations":[' + (($ids | ForEach-Object { '"' + $_ + '"' }) -join ",") + ']}'

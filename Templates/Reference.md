@@ -10,7 +10,7 @@ await tp.file.move(`Reference/${title}`)
 tags: [reference]
 kind: how-to
 systems: []
-verified: <% tp.date.now("YYYY-MM-DD") %>
+verified:
 source:
 ---
 ## Summary

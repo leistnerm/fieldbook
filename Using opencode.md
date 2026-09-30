@@ -75,7 +75,9 @@ Good commands say what to read, what to produce, what never to touch, and
 
 ## Make it follow your habits
 
-Rules that apply every time belong in `AGENTS.md`, not in each prompt. Add a
+Rules that apply every time belong in `AGENTS.local.md` (your own file; kit
+updates never touch it), not in each prompt and not in `AGENTS.md`, which
+updates replace. Add a
 line ("Always file meeting notes for the Platform team under the Platform
 project") and it holds from the next session. Keep the file short and direct;
 long, chatty rules get followed less well. If you want a rule for one

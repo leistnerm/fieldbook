@@ -1,0 +1,10 @@
+{
+  "id": "0002",
+  "title": "Person worker type and contract end",
+  "tag": "person",
+  "ops": [
+    { "op": "addKey", "key": "workerType", "value": "" },
+    { "op": "addKey", "key": "contractEnd", "value": "" }
+  ],
+  "note": "workerType and contractEnd are described in AGENTS.md > People."
+}

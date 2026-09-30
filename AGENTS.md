@@ -246,7 +246,7 @@ instructions. One note per finding, in `Reference/`, from
 tags: [reference]
 kind: how-to           # how-to | query | instructions | other
 systems: []            # names, reused from people's `supports` where they match
-verified: YYYY-MM-DD   # when the user last confirmed it still works
+verified:              # YYYY-MM-DD, empty until the user confirms it still works
 source:                # where it came from (optional)
 ```
 
@@ -257,8 +257,9 @@ append-only).
   exactly as given; never add steps, fix, or improve them; mark gaps with `?`.
 - Never store a password, token or key. If the input has one, leave it out and
   say so.
-- Set `verified` only when the user says they confirmed it; when they do,
-  update it and add a Log line.
+- Leave `verified` empty on a new note. Set it only when the user says they
+  confirmed it; when they do, update it and add a Log line. The "Not verified
+  in a year" view lists empty and old dates.
 - One note per finding: before making one, look for an existing note on the
   same thing and offer to update it instead.
 - Who supports a system is not a Reference note; it goes in the person's
@@ -299,6 +300,7 @@ tags: [person]
 aliases: []          # other names they go by; the plain name once qualified
 status: current      # current | former
 relationship:        # self | report | manager | skip-level | peer | stakeholder | vendor | other
+workerType:          # employee | contractor | consultant | vendor | government | competitor | other
 company:             # employer — the user's company for colleagues, else vendor/partner/customer
 title:
 team:
@@ -306,6 +308,7 @@ manager:             # "[[Person]]"
 location:
 timezone:
 hireDate:            # YYYY-MM-DD (drives work anniversaries)
+contractEnd:         # YYYY-MM-DD, for contractors and consultants
 birthday:            # YYYY-MM-DD; year 1900 = year unknown
 employeeNumber:      # text, quoted, so leading zeros survive
 workEmail:
@@ -332,6 +335,9 @@ embeds.
   person's `supports` or any Reference note's `systems`; ask before adding a
   new spelling. "Who supports X?" is answered from `supports` (ignore
   case), then point to Reference notes whose `systems` include X.
+- `workerType` is what they are (employment kind); `relationship` is how they
+  relate to the user. They are independent: a contractor can be a report.
+  Ask if unclear; never guess it from a company name.
 - Feedback & recognition is dated and append-only, like a task log.
 - Goals go under a `### Goals YYYY` heading in Goals & development, one per
   line. They're set per person, per year, and usually few. A new year gets

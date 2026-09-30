@@ -142,7 +142,11 @@ says where they came from). Names in **Commitments** never get notes.
 Or by hand: new note in `People/`, insert template *Person*.
 Then set `company`, `relationship` (report / manager / peer / …), and
 `manager`. Tell opencode details as you learn them; it files them in the
-right field or section. Typo'd a name and got a stray note? Just delete it.
+right field or section: `workerType` (employee, contractor, consultant,
+vendor, government, competitor), `contractEnd`, `employeeNumber`, work and other emails and phones,
+`addresses`, `usernames` on other systems ("jira: jsmith"; a stray
+`[[jsmith]]` then warns instead of making a duplicate person) and `supports`
+(systems they support). Typo'd a name and got a stray note? Just delete it.
 
 **Two people, same name** — rules: [[AGENTS]] → People → Same name. Your part:
 link the new one as `[[John Smith (Contoso)]]` (its note is created), then
@@ -185,6 +189,13 @@ about and `verified` (when you last confirmed it). Find them in
 [[TaskNotes/Views/Reference.base]] or ask opencode. "Who supports LDAP?"
 reads the `supports` list on people; the People view *Supports* shows it.
 Never put passwords or tokens in a note.
+
+**Update the kit** — `VERSION` is your release. Download a newer release zip
+from the GitHub releases page, commit your vault, then run
+`.opencode\scripts\update-fieldbook.ps1 -From <zip>` (it only shows what it
+would do until you add `-Apply`). Files you edited are kept and the new copy
+lands beside them as `.fieldbook-new`. Put your own rules in `AGENTS.local.md`.
+Details: [[Features]] → Updating the kit.
 
 **Look back** — `/report <from> <to>`, or the *Done in range* view in
 Dashboard.base (edit its two dates).

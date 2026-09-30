@@ -147,7 +147,7 @@ you don't delete just shows up in the `/` list; it does no harm.
 **Reference notes**
 - What: one note per thing you found and want to find again: a how-to,
   a query, request instructions. `/learn` files it from what you paste; each
-  has a kind, the systems it's about and a date you last verified it. Who
+  has a kind, the systems it's about and a date you last verified it (empty until you say you did). Who
   supports which system lives on the person (`supports`), not in a note.
   Never store passwords or tokens in one.
 - Files: `Reference/`, `Templates/Reference.md`, `Reference.base`,
@@ -160,7 +160,8 @@ you don't delete just shows up in the `/` list; it does no harm.
   shows what it would do; add `-Apply` to do it. Files you haven't edited are
   replaced, files you edited are kept and the new copy is saved beside them
   as `.fieldbook-new`, and renamed note fields are migrated. Your notes and
-  settings are never overwritten. Put your own rules in `AGENTS.local.md`,
+  settings are never overwritten. A kit file you deleted stays deleted (the
+  update lists it, it doesn't bring it back). Put your own rules in `AGENTS.local.md`,
   not in `AGENTS.md`.
 - Files: `VERSION`, `CHANGELOG.md`, `fieldbook-manifest.json`,
   `fieldbook-applied.json`, `.opencode/scripts/update-fieldbook.ps1`,

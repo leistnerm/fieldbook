@@ -3,6 +3,7 @@ tags: [person]
 aliases: []
 status: current
 relationship:
+workerType:
 company:
 title:
 team:
@@ -10,6 +11,7 @@ manager:
 location:
 timezone:
 hireDate:
+contractEnd:
 birthday:
 employeeNumber:
 workEmail:

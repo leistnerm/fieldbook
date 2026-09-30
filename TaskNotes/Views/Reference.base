@@ -46,8 +46,7 @@ views:
     name: Not verified in a year
     filters:
       and:
-        - '!verified.isEmpty()'
-        - 'date(verified) < today() - "365d"'
+        - 'verified.isEmpty() || date(verified) < today() - "365d"'
     order:
       - file.name
       - kind

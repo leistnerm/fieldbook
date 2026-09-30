@@ -3,6 +3,7 @@ tags: [person]
 aliases: []
 status: current
 relationship: report
+workerType: employee
 company: Example Co
 title: Senior Engineer
 team: Platform
@@ -10,6 +11,7 @@ manager: "[[Your Name]]"
 location: Remote
 timezone: America/New_York
 hireDate: 2022-10-03
+contractEnd:
 birthday: 1900-10-14
 employeeNumber:
 workEmail: example.person@example.com
