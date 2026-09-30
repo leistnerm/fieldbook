@@ -5,6 +5,7 @@ parent:
 owner:
 stakeholders: []
 jira:
+jira_url:
 start:
 target:
 ---
@@ -25,6 +26,9 @@ target:
 
 ## Done — last 90 days
 ![[TaskNotes/Views/Project.base#Done last 90 days]]
+
+## Research
+![[TaskNotes/Views/Project.base#Research]]
 
 ## Meetings
 ![[TaskNotes/Views/Project.base#Meetings]]

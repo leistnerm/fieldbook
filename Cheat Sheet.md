@@ -18,6 +18,7 @@ date is 2021-03-01", "what's blocked on Raj?").
 |---------|------|---------|
 | `/task` | create a task from a description | `/task Alice to update the runbook by Fri, high, PROJ-88` |
 | `/log` | add a dated log line (updates status if it says so) | `/log runbook blocked on infra access` |
+| `/jira-status` | (optional) read a Jira issue and compare it with the task; never writes to Jira | `/jira-status ABC-123` · `/jira-status runbook` |
 | `/close` | mark done (or dropped) and set completion date | `/close runbook` · `/close vendor eval dropped` |
 | `/actions` | turn a meeting's Action items into tasks (asks first) | `/actions` · `/actions platform sync` |
 | `/commitments` | search meeting Commitments | `/commitments Finance last month` |

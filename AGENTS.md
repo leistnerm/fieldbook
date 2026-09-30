@@ -98,7 +98,8 @@ created from a meeting gets `- YYYY-MM-DD: from [[<meeting note>]]`.
 
 ## Jira
 
-Work often never reaches Jira; help the user catch it. The `jira` field
+Work often never reaches Jira; help the user catch it. `/jira-status` (optional)
+reads an issue and compares it with the task; nothing is ever written to Jira. The `jira` field
 has three states: an issue key, `none` (they decided it doesn't belong — never
 suggest it again), or empty (not decided yet).
 
@@ -188,6 +189,7 @@ parent:              # "[[Parent project]]" for a sub-project; empty = top level
 owner:               # "[[Person]]"
 stakeholders: []     # "[[Person]]" links
 jira:                # epic key
+jira_url:            # this project's Jira address (optional; used by /jira-status; empty = parent's)
 start:               # YYYY-MM-DD
 target:              # YYYY-MM-DD
 ```

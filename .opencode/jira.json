@@ -1,0 +1,10 @@
+{
+  "instances": [
+    {
+      "baseUrl": "REPLACE-JIRA-URL",
+      "flavor": "server",
+      "tokenVar": "JIRA_TOKEN",
+      "email": ""
+    }
+  ]
+}

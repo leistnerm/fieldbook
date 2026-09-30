@@ -5,6 +5,7 @@ parent:
 owner: "[[Your Name]]"
 stakeholders: []
 jira:
+jira_url:
 start:
 target:
 ---
@@ -28,6 +29,9 @@ Website relaunch work links here directly.
 
 ## Done — last 90 days
 ![[TaskNotes/Views/Project.base#Done last 90 days]]
+
+## Research
+![[TaskNotes/Views/Project.base#Research]]
 
 ## Meetings
 ![[TaskNotes/Views/Project.base#Meetings]]

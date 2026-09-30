@@ -91,9 +91,47 @@ you don't delete just shows up in the `/` list; it does no harm.
 - What: tasks carry a `jira` key or `none`; `/jira-check` finds work that
   belongs in Jira and drafts the issue for you to paste; `/jira-comment`
   drafts updates. Nothing is ever posted or created for you.
-- Remove: delete `jira-check.md` and `jira-comment.md`, the "Jira" section of
+- Remove: delete `jira-check.md`, `jira-comment.md`, `jira-status.md`, `jira-pull.ps1` and `jira.json`, the "Jira" section of
   `AGENTS.md`, the `jira` user field in TaskNotes, and the "No Jira decision"
   embed in `Dashboard.md`.
+
+**Jira status pull (optional, read-only)**
+- What: `/jira-status <task, project or ABC-123>` reads the current state
+  and latest comments of an issue, compares them with your task's status,
+  due date and log, and suggests a task change or a comment for you to
+  paste. It only sends GET requests to a Jira you listed in `jira.json`, and
+  writes nothing to Jira.
+- Files: `.opencode/jira.json`, `.opencode/scripts/jira-pull.ps1`,
+  `.opencode/commands/jira-status.md`, and the `jira_url` field on project
+  notes. Windows only. Off until you set it up.
+- Per project: put the project's Jira address in its `jira_url` (a
+  sub-project without one uses its parent's). Projects that live in different
+  Jira instances just use different addresses; several projects in one
+  instance can share one. `jira_url` only picks the instance by host name.
+  The addresses the script may talk to are listed in `jira.json`, so a note
+  can never send your token to a host you didn't list.
+- Set up once (check your organization's policy on API tokens first):
+  1. In `.opencode/jira.json`, describe each Jira instance you use (copy the
+     block for more): `baseUrl` (for example `https://jira.example.com`, or
+     `https://yourname.atlassian.net`), `flavor` (`server` for Jira Data
+     Center / Server, `cloud` for Jira Cloud) and `tokenVar`, the name of the
+     environment variable for that instance's token. It must start with
+     `JIRA_` (for example `JIRA_TOKEN`, `JIRA_TOKEN_OTHER`).
+  2. Make a token per instance. Data Center / Server (8.14 or later):
+     profile → Personal Access Tokens → Create token. Older Server versions
+     that only accept a password are not supported. Cloud: id.atlassian.com →
+     Security → API tokens.
+  3. Store each as a user environment variable in PowerShell:
+     `setx JIRA_TOKEN "<token>"`. For cloud also `setx JIRA_EMAIL "<your
+     Atlassian email>"` (or set `email` in `jira.json`). Quit opencode Desktop
+     and sign out of Windows and back in.
+  4. Set `jira_url` on the project (`https://jira.example.com/browse/ABC` or
+     just the host address), then run `/jira-status ABC-123` with a real key;
+     approve the script when opencode asks (it asks every time unless you add
+     an allow rule).
+- The token carries your own Jira permissions, so "read-only" is enforced by
+  the script (GET only), not by the token. Don't put a token in a note, in
+  `opencode.json`, or in git. Web access stays denied for the model itself.
 
 **Research and experiments**
 - What: a private notebook of questions and experiments with method,
@@ -124,11 +162,6 @@ you don't delete just shows up in the `/` list; it does no harm.
   version.
 - Files: `.gitignore`, `.git` pointer, `.opencode/plugins/auto-commit.js`.
 - Needs: git (SETUP section 5).
-
-**Outlook meeting import** (experimental, Windows and classic Outlook only)
-- What: `.opencode/scripts/outlook-meetings.ps1` reads your calendar and
-  prints meetings as JSON. It is not wired to a command yet; run it with
-  `-Test` first. Skip it if you use new Outlook or another calendar.
 
 ## What you can adopt alone
 

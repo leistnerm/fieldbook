@@ -18,7 +18,6 @@ Daily reference: [[Cheat Sheet]].
   `git --version` in PowerShell.
 - Access to an AI model for opencode: an API key for a provider, or your
   company's internal endpoint (section 7).
-- Optional: classic Outlook, if you want the meeting-import script.
 
 The few commands below are for PowerShell (not Command Prompt). Day-to-day use
 is all in the Obsidian and opencode Desktop windows.
@@ -39,7 +38,8 @@ Templates/             the Templater templates (incl. Review-format, the
                        company review form)
 .opencode/commands/    the slash commands (list: Cheat Sheet)
 .opencode/plugins/     auto-people.js, auto-commit.js
-.opencode/scripts/     capture.ps1 (Ctrl+Alt+I), vtt-to-md.ps1, outlook-meetings.ps1
+.opencode/scripts/     capture.ps1 (Ctrl+Alt+I), vtt-to-md.ps1,
+                       jira-pull.ps1 (optional)
 Inbox.md               quick captures waiting for /inbox
 Transcripts/           Teams transcripts for /transcript (raw .vtt never in git;
                        converted notes you keep are)

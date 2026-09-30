@@ -19,8 +19,8 @@ change.
 - **Reviews**: `/review` drafts a mid-year or year-end review from what you
   logged, citing a note for every statement. It never rates anyone.
 - **Transcripts**: `/transcript` turns a Teams transcript into meeting notes.
-- **Quick capture**, an optional Jira link (never posts anything), research
-  notes and an Outlook calendar import (experimental).
+- **Quick capture**, an optional Jira link (never posts anything) and research
+  notes.
 
 Every part is optional; see `Features.md` for what each does and how to remove
 it.
@@ -37,8 +37,8 @@ The rules opencode follows are in `AGENTS.md`; the slash commands are in
 
 ## Status
 
-Early and lightly tested. Windows and classic Outlook are the primary
-targets. The Bases views, the PowerShell scripts, the permission patterns and
+Early and lightly tested. Windows is the primary
+target. The Bases views, the PowerShell scripts, the permission patterns and
 the way opencode Desktop loads commands and plugins have not all been checked
 on a fresh install, so expect to tweak. Issues and pull requests are welcome.
 
