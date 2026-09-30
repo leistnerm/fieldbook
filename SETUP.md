@@ -27,6 +27,10 @@ is all in the Obsidian and opencode Desktop windows.
 ```
 AGENTS.md              rules opencode follows (read automatically) — also the
                        one place that says where every kind of note lives
+AGENTS.local.md        your own rules; updates never touch it
+VERSION, CHANGELOG.md  release number and what changed
+fieldbook-manifest.json, fieldbook-applied.json
+                       what the update script compares (leave them alone)
 opencode.json          model provider config and permissions
 Cheat Sheet.md         commands and how-tos for daily use
 Features.md            what each part does and how to remove it
@@ -39,7 +43,7 @@ Templates/             the Templater templates (incl. Review-format, the
 .opencode/commands/    the slash commands (list: Cheat Sheet)
 .opencode/plugins/     auto-people.js, auto-commit.js
 .opencode/scripts/     capture.ps1 (Ctrl+Alt+I), vtt-to-md.ps1,
-                       jira-pull.ps1 (optional)
+                       jira-pull.ps1 (optional), update-fieldbook.ps1
 Inbox.md               quick captures waiting for /inbox
 Transcripts/           Teams transcripts for /transcript (raw .vtt never in git;
                        converted notes you keep are)

@@ -1,5 +1,9 @@
 # Rules for this vault
 
+If `AGENTS.local.md` exists, read it too and follow it; where it conflicts with
+this file, it wins. Don't edit this file for the user's own rules; put those
+in `AGENTS.local.md`.
+
 This is the user's work-task system. Obsidian + TaskNotes own the task files; you
 edit them on request. You act only when asked. Never create, close, or change
 a task, meeting, or person note the user didn't ask about. Exceptions: the

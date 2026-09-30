@@ -153,6 +153,20 @@ you don't delete just shows up in the `/` list; it does no harm.
 - Files: `Reference/`, `Templates/Reference.md`, `Reference.base`,
   `.opencode/commands/learn.md`.
 
+**Updating the kit**
+- What: `VERSION` says which release you have. To move to a newer one,
+  download its zip from the GitHub releases page and run
+  `.opencode\scripts\update-fieldbook.ps1 -From <the zip>`. It first only
+  shows what it would do; add `-Apply` to do it. Files you haven't edited are
+  replaced, files you edited are kept and the new copy is saved beside them
+  as `.fieldbook-new`, and renamed note fields are migrated. Your notes and
+  settings are never overwritten. Put your own rules in `AGENTS.local.md`,
+  not in `AGENTS.md`.
+- Files: `VERSION`, `CHANGELOG.md`, `fieldbook-manifest.json`,
+  `fieldbook-applied.json`, `.opencode/scripts/update-fieldbook.ps1`,
+  `.opencode/migrations/`. Windows only. Commit the vault first (the script
+  checks); git is your undo.
+
 **Quick capture and inbox**
 - What: Ctrl+Alt+I from any app opens a one-line box; the text goes to
   `Inbox.md`. `/inbox` later sorts each line into a task, person note,
