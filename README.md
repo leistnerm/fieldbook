@@ -29,7 +29,8 @@ it.
 
 1. Read `SETUP.md`. It walks through a from-scratch install on Windows:
    Obsidian, its plugins, git, opencode Desktop and a model provider.
-2. Keep `Cheat Sheet.md` open for daily use.
+2. Keep `Cheat Sheet.md` open for daily use, and read `Using opencode.md` to
+   get more from the assistant and to write your own commands.
 
 The rules opencode follows are in `AGENTS.md`; the slash commands are in
 `.opencode/commands/`.

@@ -1,6 +1,6 @@
 # Cheat Sheet
 
-Home: [[Dashboard]] · Install: [[SETUP]] · What each part does: [[Features]] · Task types: [[Types]]
+Home: [[Dashboard]] · Install: [[SETUP]] · What each part does: [[Features]] · Using the assistant: [[Using opencode]] · Task types: [[Types]]
 
 ## Where things live
 

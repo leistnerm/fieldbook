@@ -60,6 +60,21 @@ views:
         direction: DESC
 
   - type: table
+    name: Research
+    filters:
+      and:
+        - file.hasTag("research")
+        - formula.inTree
+    order:
+      - file.name
+      - status
+      - question
+      - started
+    sort:
+      - property: started
+        direction: DESC
+
+  - type: table
     name: Meetings
     filters:
       and:

@@ -31,6 +31,7 @@ AGENTS.md              rules opencode follows (read automatically) — also the
 opencode.json          model provider config and permissions
 Cheat Sheet.md         commands and how-tos for daily use
 Features.md            what each part does and how to remove it
+Using opencode.md      how to use the assistant, and write your own commands
 Dashboard.md, Types.md home page; allowed task `type` values
 TaskNotes/Views/       the .base views (+ TaskNotes' own *-default.base files
                        — keep them)

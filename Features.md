@@ -1,7 +1,8 @@
 # Features
 
 What the vault does, one module at a time, so you can adopt all of it or only
-some. Install: [[SETUP]]. Day-to-day commands and how-tos: [[Cheat Sheet]].
+some. Install: [[SETUP]]. Day-to-day commands and how-tos: [[Cheat Sheet]]. Getting more out of
+opencode, and writing your own commands: [[Using opencode]].
 Field and folder rules: [[AGENTS]].
 
 ## How the pieces fit
@@ -97,7 +98,8 @@ you don't delete just shows up in the `/` list; it does no harm.
 **Research and experiments**
 - What: a private notebook of questions and experiments with method,
   findings, log and a status (idea, active, concluded, dropped). Never linked
-  from tasks or Jira.
+  from tasks or Jira. `/triage` flags research active 30+ days with no recent
+  Log line, and a project page shows its linked research.
 - Files: `Research/`, `Templates/Research.md`, `Research.base`.
 
 **Quick capture and inbox**

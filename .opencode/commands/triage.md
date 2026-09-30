@@ -17,6 +17,9 @@ and report, in this order:
    or alias, a plain-named person note alongside a qualified note of the same
    name, and Commitments lines naming a person more than one note could be
 9. Inbox.md: number of items and the date of the oldest ("run /inbox")
+10. research notes (tag `research`) with `status: active` for 30+ days
+    (`started`) and no Log line dated in the last 30 days: suggest a log
+    line, moving it to `concluded`, or `dropped`
 
 One line per item. Then propose changes, one at a time, and wait for my yes
 before editing anything.
