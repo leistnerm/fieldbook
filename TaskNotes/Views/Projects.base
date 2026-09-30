@@ -1,0 +1,44 @@
+filters:
+  and:
+    - file.hasTag("project")
+    - '!file.inFolder("Templates")'
+
+formulas:
+  area: 'if(parent.isEmpty(), file.asLink(), parent)'
+
+views:
+  - type: table
+    name: Active
+    filters:
+      and:
+        - 'status == "active"'
+    groupBy:
+      property: formula.area
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - owner
+      - target
+      - jira
+
+  - type: table
+    name: Paused
+    filters:
+      and:
+        - 'status == "paused"'
+    order:
+      - file.name
+      - parent
+      - owner
+
+  - type: table
+    name: Done
+    filters:
+      and:
+        - 'status == "done" || status == "dropped"'
+    order:
+      - file.name
+      - parent
+      - status
+      - target

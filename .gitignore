@@ -1,0 +1,15 @@
+# Obsidian per-device UI state — changes constantly, nothing to keep
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Raw Teams transcripts and unreviewed conversions stay out of git;
+# only converted notes you choose to keep (Transcripts/*.md) are tracked
+Transcripts/*.vtt
+Transcripts/.work/
+
+# opencode's plugin install files
+.opencode/node_modules/
+.opencode/bun.lock
+.opencode/package.json

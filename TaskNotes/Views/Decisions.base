@@ -1,0 +1,76 @@
+filters:
+  and:
+    - file.hasTag("decision")
+    - '!file.inFolder("Templates")'
+
+views:
+  # Embedded in each Meetings/Series/<name>.md — "this" is the series note.
+  - type: table
+    name: Series
+    filters:
+      and:
+        - 'series == this.file.asLink()'
+    order:
+      - file.name
+      - note.date
+      - status
+      - revisit
+    sort:
+      - property: note.date
+        direction: DESC
+
+  - type: table
+    name: Active
+    filters:
+      and:
+        - 'status != "superseded"'
+    order:
+      - file.name
+      - note.date
+      - status
+      - revisit
+      - projects
+      - series
+    sort:
+      - property: note.date
+        direction: DESC
+
+  - type: table
+    name: Due for revisit  # revisit date within 14 days, or no date set
+    filters:
+      and:
+        - 'status == "revisit" && (!revisit || date(revisit) <= today() + "14d")'
+    order:
+      - file.name
+      - revisit
+      - note.date
+      - series
+    sort:
+      - property: revisit
+        direction: ASC
+
+  - type: table
+    name: By project
+    filters:
+      and:
+        - 'status != "superseded"'
+    groupBy:
+      property: projects
+      direction: ASC
+    order:
+      - file.name
+      - note.date
+      - status
+
+  - type: table
+    name: Superseded
+    filters:
+      and:
+        - 'status == "superseded"'
+    order:
+      - file.name
+      - note.date
+      - superseded_by
+    sort:
+      - property: note.date
+        direction: DESC

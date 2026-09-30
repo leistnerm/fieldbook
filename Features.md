@@ -1,0 +1,141 @@
+# Features
+
+What the vault does, one module at a time, so you can adopt all of it or only
+some. Install: [[SETUP]]. Day-to-day commands and how-tos: [[Cheat Sheet]].
+Field and folder rules: [[AGENTS]].
+
+## How the pieces fit
+
+- **Notes are plain markdown** with properties (frontmatter). Nothing is
+  locked in.
+- **Obsidian** shows them: **TaskNotes** manages task files and boards,
+  **Bases** builds the lists and dashboards, **Templater** makes new notes from
+  templates.
+- **opencode** is the assistant. It follows `AGENTS.md` and offers the slash
+  commands in `.opencode/commands/`. It edits notes but never posts anywhere,
+  never rewrites git history, and never deletes files.
+- **git** records every change, so anything can be undone.
+
+## Removing a module
+
+Delete its files, then remove its rows from the "Where things live" table and
+its section in `AGENTS.md`, and its embeds in `Dashboard.md`. A command file
+you don't delete just shows up in the `/` list; it does no harm.
+
+## The modules
+
+**Core: tasks** (keep this one)
+- What: a task is a note with status, priority, type, due date, project,
+  assignee, requester, and a dated log. Boards, overdue/blocked lists, by
+  project, by type, recurring tasks, date-range views.
+- Files: `TaskNotes/`, `Types.md`, `Templates/Task body.md`, `Dashboard.md`.
+- Commands: `/task`, `/log`, `/close`, `/triage`, `/report`, `/status-update`.
+- Needs: TaskNotes, Bases.
+
+**Projects and sub-projects**
+- What: a project note with owner, status and purpose; sub-projects roll up
+  into their parent; `/project` summarizes status across the tree.
+- Files: `Projects/`, `Templates/Project.md`, `Project.base`, `Projects.base`.
+- Commands: `/project`.
+
+**People**
+- What: one note per person: company, team, manager, birthday, hire date,
+  goals by year, feedback, plus live lists of their tasks, meetings and
+  reviews. Handles two people with the same name. Notes are created for you
+  when you link a new name.
+- Files: `People/`, `Templates/Person.md`, `Person.base`, `People.base`,
+  `.opencode/plugins/auto-people.js`.
+- Remove the auto-creation only: delete `auto-people.js`.
+- Personal details: see the Personal data note in [[SETUP]].
+
+**Team management** (delegating and 1:1s)
+- What: give a task an `assignee`; it appears on that person's note and on the
+  Delegated list. `/1on1` builds an agenda from open items, recent
+  commitments and feedback.
+- Commands: `/1on1`. Needs: People.
+
+**Meetings**
+- What: dated meeting notes, filed by year and month, with Action items
+  (become tasks), Decisions, and Commitments (what others agreed to, with no
+  checkbox, searchable later).
+- Files: `Meetings/`, `Templates/Meeting.md`, `Meetings.base`.
+- Commands: `/actions`, `/commitments`.
+
+**Recurring meetings**
+- What: a series note (cadence, attendees, standing agenda) and `/prep`, which
+  drafts the next agenda from open actions, due commitments and decisions to
+  revisit, and creates the meeting note.
+- Files: `Meetings/Series/`, `Templates/Series.md`. Commands: `/prep`.
+- Needs: Meetings.
+
+**Decisions**
+- What: one-line decisions in meetings; a full record (context, options,
+  rationale, superseded-by) for the important ones; a revisit date that
+  surfaces on the Dashboard.
+- Files: `Decisions/`, `Templates/Decision.md`, `Decisions.base`.
+- Commands: `/decisions`, `/decision-record`.
+
+**Reviews** (mid-year and year-end)
+- What: `/review` drafts a review or self-assessment in your company's form,
+  from the tasks, feedback, meetings and decisions you logged, citing a note
+  for every statement. It never rates anyone.
+- Files: `Reports/Reviews/`, `Templates/Review-format.md` (edit to your form),
+  `Reviews.base`. Needs: People goals and feedback lines.
+
+**Reports and look-back**
+- What: what got done in any date range, by type and project.
+- Files: `Reports/`. Commands: `/report`.
+
+**Jira link (optional)**
+- What: tasks carry a `jira` key or `none`; `/jira-check` finds work that
+  belongs in Jira and drafts the issue for you to paste; `/jira-comment`
+  drafts updates. Nothing is ever posted or created for you.
+- Remove: delete `jira-check.md` and `jira-comment.md`, the "Jira" section of
+  `AGENTS.md`, the `jira` user field in TaskNotes, and the "No Jira decision"
+  embed in `Dashboard.md`.
+
+**Research and experiments**
+- What: a private notebook of questions and experiments with method,
+  findings, log and a status (idea, active, concluded, dropped). Never linked
+  from tasks or Jira.
+- Files: `Research/`, `Templates/Research.md`, `Research.base`.
+
+**Quick capture and inbox**
+- What: Ctrl+Alt+I from any app opens a one-line box; the text goes to
+  `Inbox.md`. `/inbox` later sorts each line into a task, person note,
+  commitment, project, research idea or Jira item.
+- Files: `Inbox.md`, `.opencode/scripts/capture.ps1`. Windows only; needs the
+  shortcut from SETUP section 8.
+
+**Transcripts to meeting notes** (optional)
+- What: `/transcript` turns a downloaded Teams transcript into a meeting note:
+  attendees, notes, decisions, action items and commitments (ISO dates), asks
+  before writing, always deletes the raw `.vtt`, and lets you keep the
+  converted transcript (linked from the note, tracked by git) or delete it.
+- Files: `Transcripts/`, `.opencode/commands/transcript.md`,
+  `.opencode/scripts/vtt-to-md.ps1`. Needs: Meetings. The most sensitive data
+  in the vault; check your company's policy.
+
+**Change history and undo**
+- What: every change is committed to git (yours through Obsidian Git,
+  opencode's by a plugin); ask opencode what changed or to restore an older
+  version.
+- Files: `.gitignore`, `.git` pointer, `.opencode/plugins/auto-commit.js`.
+- Needs: git (SETUP section 5).
+
+**Outlook meeting import** (experimental, Windows and classic Outlook only)
+- What: `.opencode/scripts/outlook-meetings.ps1` reads your calendar and
+  prints meetings as JSON. It is not wired to a command yet; run it with
+  `-Test` first. Skip it if you use new Outlook or another calendar.
+
+## What you can adopt alone
+
+- Only tasks: Core + Projects. Delete the rest of the folders and commands.
+- Tasks + meetings: add Meetings, Recurring meetings, Decisions, Transcripts.
+- Managers: add People, Team management, Reviews.
+- Anything else stands alone; Research and Quick capture need only the Core.
+
+To add your own kind of note: a folder, a template, a section in `AGENTS.md`
+saying where it lives and which fields it has, and optionally a `.base` view
+and a command file in `.opencode/commands/`. Task types: just add a row to
+[[Types]].

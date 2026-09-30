@@ -1,0 +1,77 @@
+# Embedded in each People/<Name>.md — "this" is that person's note.
+views:
+  - type: table
+    name: Open
+    filters:
+      and:
+        - file.hasTag("task")
+        - 'list(assignee).contains(this.file.asLink())'
+        - 'status != "done" && status != "dropped"'
+    order:
+      - file.name
+      - status
+      - priority
+      - due
+      - jira
+    sort:
+      - property: priority
+        direction: ASC
+      - property: due
+        direction: ASC
+
+  - type: table
+    name: Done last 30 days
+    filters:
+      and:
+        - file.hasTag("task")
+        - 'list(assignee).contains(this.file.asLink())'
+        - 'status == "done"'
+        - 'date(completedDate) >= today() - "30d"'
+    order:
+      - file.name
+      - completedDate
+    sort:
+      - property: completedDate
+        direction: DESC
+
+  - type: table
+    name: Meetings
+    filters:
+      and:
+        - file.hasTag("meeting")
+        - 'list(attendees).contains(this.file.asLink())'
+    order:
+      - file.name
+      - note.date
+      - projects
+    sort:
+      - property: note.date
+        direction: DESC
+
+  - type: table
+    name: Direct reports
+    filters:
+      and:
+        - file.hasTag("person")
+        - 'manager == this.file.asLink()'
+        - 'status != "former"'
+    order:
+      - file.name
+      - title
+      - team
+
+  - type: table
+    name: Reviews
+    filters:
+      and:
+        - file.hasTag("review")
+        - 'person == this.file.asLink()'
+    order:
+      - file.name
+      - kind
+      - status
+      - from
+      - to
+    sort:
+      - property: to
+        direction: DESC

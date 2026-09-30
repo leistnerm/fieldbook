@@ -1,0 +1,90 @@
+# Embedded in each Projects/<Name>.md — "this" is that project note.
+# inTree = the note's `projects` names this project OR one of its direct
+# sub-projects (a project whose `parent` is this one) — one level only. If the roll-up misbehaves,
+# fix it here only; every view uses it.
+formulas:
+  inTree: 'list(projects).contains(this.file.asLink()) || list(projects).filter(value.asFile() && value.asFile().properties.parent && value.asFile().properties.parent.toString().contains("[[" + this.file.name + "]]")).length > 0'
+
+views:
+  - type: table
+    name: Sub-projects
+    filters:
+      and:
+        - file.hasTag("project")
+        - 'parent && parent.toString().contains("[[" + this.file.name + "]]")'
+    order:
+      - file.name
+      - status
+      - owner
+      - target
+      - jira
+    sort:
+      - property: status
+        direction: ASC
+
+  - type: table
+    name: Open tasks
+    filters:
+      and:
+        - file.hasTag("task")
+        - formula.inTree
+        - 'status != "done" && status != "dropped"'
+    order:
+      - file.name
+      - projects
+      - status
+      - priority
+      - assignee
+      - due
+    sort:
+      - property: priority
+        direction: ASC
+      - property: due
+        direction: ASC
+
+  - type: table
+    name: Done last 90 days
+    filters:
+      and:
+        - file.hasTag("task")
+        - formula.inTree
+        - 'status == "done"'
+        - 'date(completedDate) >= today() - "90d"'
+    order:
+      - file.name
+      - projects
+      - completedDate
+      - assignee
+    sort:
+      - property: completedDate
+        direction: DESC
+
+  - type: table
+    name: Meetings
+    filters:
+      and:
+        - file.hasTag("meeting")
+        - formula.inTree
+    order:
+      - file.name
+      - note.date
+      - projects
+      - series
+    sort:
+      - property: note.date
+        direction: DESC
+
+  - type: table
+    name: Decisions
+    filters:
+      and:
+        - file.hasTag("decision")
+        - formula.inTree
+    order:
+      - file.name
+      - note.date
+      - projects
+      - status
+    sort:
+      - property: note.date
+        direction: DESC

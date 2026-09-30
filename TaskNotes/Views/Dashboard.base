@@ -1,0 +1,210 @@
+filters:
+  and:
+    - file.hasTag("task")
+
+formulas:
+  isOpen: 'status != "done" && status != "dropped"'
+
+views:
+  - type: table
+    name: Open by priority
+    filters:
+      and:
+        - formula.isOpen
+    order:
+      - file.name
+      - status
+      - priority
+      - type
+      - projects
+      - assignee
+      - due
+    sort:
+      - property: priority
+        direction: ASC
+      - property: due
+        direction: ASC
+
+  - type: tasknotesKanban
+    name: Kanban
+    filters:
+      and:
+        - 'status != "dropped"'
+    order:
+      - priority
+      - due
+      - assignee
+    groupBy:
+      property: status
+      direction: ASC
+
+  - type: table
+    name: Open by project
+    filters:
+      and:
+        - formula.isOpen
+    groupBy:
+      property: projects
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - priority
+      - due
+    sort:
+      - property: priority
+        direction: ASC
+
+  - type: table
+    name: Open by type
+    filters:
+      and:
+        - formula.isOpen
+    groupBy:
+      property: type
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - priority
+      - due
+
+  - type: table
+    name: Open by tag
+    filters:
+      and:
+        - formula.isOpen
+    groupBy:
+      property: tags
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - priority
+      - due
+
+  - type: table
+    name: Delegated
+    filters:
+      and:
+        - formula.isOpen
+        - '!assignee.isEmpty()'
+    groupBy:
+      property: assignee
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - priority
+      - due
+    sort:
+      - property: due
+        direction: ASC
+
+  - type: table
+    name: Overdue
+    filters:
+      and:
+        - formula.isOpen
+        - '!due.isEmpty()'
+        - 'date(due) < today()'
+    order:
+      - file.name
+      - due
+      - priority
+      - assignee
+    sort:
+      - property: due
+        direction: ASC
+
+  # Open tasks with no Jira decision yet (empty `jira`; `none` = decided no).
+  # Which ones should be in Jira is opencode's call — run /jira-check.
+  - type: table
+    name: No Jira decision
+    filters:
+      and:
+        - formula.isOpen
+        - 'jira.isEmpty()'
+    order:
+      - file.name
+      - type
+      - projects
+      - assignee
+      - status
+    sort:
+      - property: priority
+        direction: ASC
+
+  - type: table
+    name: Blocked
+    filters:
+      and:
+        - 'status == "blocked"'
+    order:
+      - file.name
+      - priority
+      - assignee
+      - dateModified
+
+  - type: table
+    name: Recurring
+    filters:
+      and:
+        - '!recurrence.isEmpty()'
+    order:
+      - file.name
+      - scheduled
+      - recurrence
+      - complete_instances
+
+  - type: table
+    name: Done last 7 days
+    filters:
+      and:
+        - 'status == "done"'
+        - 'date(completedDate) >= today() - "7d"'
+    order:
+      - file.name
+      - completedDate
+      - type
+      - projects
+    sort:
+      - property: completedDate
+        direction: DESC
+
+  - type: table
+    name: Done last 30 days
+    filters:
+      and:
+        - 'status == "done"'
+        - 'date(completedDate) >= today() - "30d"'
+    groupBy:
+      property: type
+      direction: ASC
+    order:
+      - file.name
+      - completedDate
+      - projects
+    sort:
+      - property: completedDate
+        direction: DESC
+
+  # Edit the two dates for any range (quarter, review period).
+  # Recurring completions aren't rows here — use /report for those.
+  - type: table
+    name: Done in range
+    filters:
+      and:
+        - 'status == "done"'
+        - 'date(completedDate) >= date("2026-07-01")'
+        - 'date(completedDate) <= date("2026-09-30")'
+    groupBy:
+      property: type
+      direction: ASC
+    order:
+      - file.name
+      - completedDate
+      - projects
+    sort:
+      - property: completedDate
+        direction: ASC

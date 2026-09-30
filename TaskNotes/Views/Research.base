@@ -1,0 +1,49 @@
+filters:
+  and:
+    - file.hasTag("research")
+    - '!file.inFolder("Templates")'
+
+views:
+  - type: table
+    name: Active
+    filters:
+      and:
+        - 'status == "active"'
+    order:
+      - file.name
+      - kind
+      - question
+      - projects
+      - started
+    sort:
+      - property: started
+        direction: DESC
+
+  - type: table
+    name: Ideas
+    filters:
+      and:
+        - 'status == "idea"'
+    order:
+      - file.name
+      - kind
+      - question
+      - started
+    sort:
+      - property: started
+        direction: DESC
+
+  - type: table
+    name: Concluded
+    filters:
+      and:
+        - 'status == "concluded" || status == "dropped"'
+    order:
+      - file.name
+      - kind
+      - status
+      - question
+      - concluded
+    sort:
+      - property: concluded
+        direction: DESC

@@ -1,0 +1,96 @@
+filters:
+  and:
+    - file.hasTag("person")
+    - '!file.inFolder("Templates")'
+
+formulas:
+  birthdayDay: 'if(birthday.isEmpty(), null, date(birthday).day)'
+  hireDay: 'if(hireDate.isEmpty(), null, date(hireDate).day)'
+  yearsAtCompany: 'if(hireDate.isEmpty(), null, today().year - date(hireDate).year)'
+
+views:
+  - type: table
+    name: Directory
+    filters:
+      and:
+        - 'status != "former"'
+    groupBy:
+      property: team
+      direction: ASC
+    order:
+      - file.name
+      - company
+      - title
+      - relationship
+      - manager
+      - location
+      - workEmail
+
+  - type: table
+    name: By company
+    filters:
+      and:
+        - 'status != "former"'
+    groupBy:
+      property: company
+      direction: ASC
+    order:
+      - file.name
+      - title
+      - team
+      - relationship
+      - workEmail
+
+  - type: table
+    name: My team
+    filters:
+      and:
+        - 'status != "former"'
+        - 'relationship == "report"'
+    order:
+      - file.name
+      - title
+      - team
+      - hireDate
+      - formula.yearsAtCompany
+
+  - type: table
+    name: Birthdays this month
+    filters:
+      and:
+        - 'status != "former"'
+        - '!birthday.isEmpty()'
+        - 'date(birthday).month == today().month'
+    order:
+      - file.name
+      - birthday
+      - team
+    sort:
+      - property: formula.birthdayDay
+        direction: ASC
+
+  - type: table
+    name: Anniversaries this month
+    filters:
+      and:
+        - 'status != "former"'
+        - '!hireDate.isEmpty()'
+        - 'date(hireDate).month == today().month'
+    order:
+      - file.name
+      - hireDate
+      - formula.yearsAtCompany
+      - team
+    sort:
+      - property: formula.hireDay
+        direction: ASC
+
+  - type: table
+    name: Former
+    filters:
+      and:
+        - 'status == "former"'
+    order:
+      - file.name
+      - title
+      - team

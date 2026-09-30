@@ -1,0 +1,49 @@
+filters:
+  and:
+    - file.hasTag("meeting")
+    - '!file.inFolder("Templates")'
+
+views:
+  # Embedded in each Meetings/Series/<name>.md — "this" is the series note.
+  - type: table
+    name: Series
+    filters:
+      and:
+        - 'series == this.file.asLink()'
+    order:
+      - file.name
+      - note.date
+      - attendees
+    sort:
+      - property: note.date
+        direction: DESC
+
+  - type: table
+    name: Recent
+    filters:
+      and:
+        - 'date(note.date) >= today() - "30d"'
+    order:
+      - file.name
+      - note.date
+      - series
+      - attendees
+      - projects
+    sort:
+      - property: note.date
+        direction: DESC
+
+  - type: table
+    name: By series
+    filters:
+      and:
+        - '!series.isEmpty()'
+    groupBy:
+      property: series
+      direction: ASC
+    order:
+      - file.name
+      - note.date
+    sort:
+      - property: note.date
+        direction: DESC
