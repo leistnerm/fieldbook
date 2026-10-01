@@ -3,6 +3,15 @@
 Newest first. The update script shows the entries newer than the version you
 have. Format: `## x.y.z - date`.
 
+## 0.3.0 - 2026-10-01
+- New `/link-check` (links that point at no note) and `/people-check` (people
+  named but not linked, and people with no note), both reading through the
+  read-only script `.opencode/scripts/link-check.ps1`.
+- SETUP: the Obsidian settings steps match current TaskNotes and Obsidian Git
+  (inline-task folder, filename format, project settings, Git plugin
+  appearing after the repo exists and a restart, push/pull toggles); the
+  Jira step points at Features.md.
+
 ## 0.2.0 - 2026-09-30
 - People get `workerType` (employee, contractor, consultant, vendor,
   government, competitor, other) and `contractEnd`; the People views show

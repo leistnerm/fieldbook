@@ -43,7 +43,8 @@ Templates/             the Templater templates (incl. Review-format, the
 .opencode/commands/    the slash commands (list: Cheat Sheet)
 .opencode/plugins/     auto-people.js, auto-commit.js
 .opencode/scripts/     capture.ps1 (Ctrl+Alt+I), vtt-to-md.ps1,
-                       jira-pull.ps1 (optional), update-fieldbook.ps1
+                       jira-pull.ps1 (optional), link-check.ps1,
+                       update-fieldbook.ps1
 Inbox.md               quick captures waiting for /inbox
 Transcripts/           Teams transcripts for /transcript (raw .vtt never in git;
                        converted notes you keep are)
@@ -101,17 +102,28 @@ and read yourself is at the root.
 **General**
 - Task identification: by tag, tag = `task`
 - Tasks folder: `TaskNotes/Tasks` (the default)
-- Filename format: the task **title** (so a task is `<Title>.md`; opencode and
-  the examples find tasks by title). Not a timestamp or zettel id.
+- Folder for inline-created tasks: `TaskNotes/Tasks` too. Its default,
+  `{{currentNotePath}}`, saves a task converted from a checkbox beside the
+  note it came from (a meeting's task in `Meetings/`), and the rules and
+  opencode expect every task in `TaskNotes/Tasks`.
 - Don't use TaskNotes' Archive — use status `dropped` instead
 
 **Task properties** — keep the default keys (`title`, `status`, `priority`,
 `due`, `scheduled`, `projects`, `recurrence`, `complete_instances`,
 `completedDate`, `dateCreated`, `dateModified`).
-- "Use parent note for inline/instant conversion": **off** — it
-  would put meeting notes into `projects`.
-- Projects → autosuggest filter: only notes with tag `project`, so
-  the project picker offers project notes, not every note in the vault.
+- **Title** card: "Store title in filename" **off** (the kit keeps `title` in
+  the note), then "Filename format" (last item in the card, below the
+  Occurrence settings; it defaults to Zettelkasten): **Task title (non-updating)**, so a
+  task is `<Title>.md`; opencode and the examples find tasks by title. Not a
+  timestamp or zettel id. "Non-updating" means editing a task's title later
+  doesn't rename its file.
+- In the **Projects** card of this section: "Use parent note for
+  inline/instant conversion": **off** — it would put meeting notes into
+  `projects`. Confirm by converting a checkbox in a meeting note: the new
+  task's `projects` must be empty.
+- Projects card → expandable **Autosuggest Filters** → Required tags:
+  `project`, so the project picker offers project notes, not every note in
+  the vault.
 
 **Statuses** (value → label; mark "Completed" where shown):
 | value   | label   | completed |
@@ -173,13 +185,20 @@ and run plain `git init`.)
       `.gitignore` (in the zip) keeps out Obsidian's window layout and opencode's
    installed packages.
 2. Obsidian → Community plugins → install **Git** (by Vinzent03), enable it.
-   Its settings (labels vary a little by version):
-   - Auto commit-and-sync interval: `10` minutes
-   - Auto commit-and-sync after stopping file edits: on
-   - Push on commit-and-sync: **off**; Pull on commit-and-sync: **off**. There
-     is no remote, so it only commits.
-   - Commit message on auto commit-and-sync: `vault: {{date}}`
-   - Pull on startup: off
+   If its settings page says "Git is not ready", the Automatic, Commit and
+   Sync sections stay hidden: finish step 1 first (the vault must have a
+   `.git` file or folder), then **restart Obsidian**; it only notices a new
+   repo at startup. Its settings (labels vary a
+   little by version):
+   - Automatic: "Auto commit-and-sync interval (minutes)" `10`, and "Auto
+     commit-and-sync after stopping file edits" on
+   - Automatic: "Commit message on auto commit-and-sync" `vault: {{date}}`
+   - Leave the auto push and auto pull intervals at `0`.
+   - Further down (under headings like Pull and Commit-and-sync; newer
+     versions put them on a Sync page): "Push on commit-and-sync" **off**
+     (older versions call it "Disable push": turn that **on**), "Pull on
+     commit-and-sync" **off**, "Pull on startup" **off**. There is no
+     remote, so the plugin only commits.
 3. Nothing to do for opencode: `auto-commit.js` finds the repo by itself.
 4. Never add a remote. A push would copy personal data off the PC.
 5. Moving to a new PC: the history doesn't come with OneDrive. Copy
@@ -296,6 +315,11 @@ again, or right-click the shortcut → Properties → Shortcut key.
 3. In `AGENTS.md`, the "Jira" section describes what belongs in Jira. Edit it
    to your team's practice, or remove the section and the `jira` nudges if you
    don't use Jira (see [[Features]]).
+   To let opencode read issue status (`/jira-status`), set up the Jira link:
+   [[Features]] → "Jira status pull" → "Set up once" (addresses in
+   `.opencode/jira.json`, a token in an environment variable, `jira_url` on
+   the project). It's optional; skip it if you don't want opencode to read
+   Jira.
 4. Delete the example notes (everything named `Example …`) and the three
    `Website` sample projects once the checks in section 10 pass.
 

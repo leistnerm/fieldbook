@@ -51,6 +51,13 @@ you don't delete just shows up in the `/` list; it does no harm.
 - Files: `People/`, `Templates/Person.md`, `Person.base`, `People.base`,
   `.opencode/plugins/auto-people.js`.
 - Remove the auto-creation only: delete `auto-people.js`.
+- `/people-check` lists people written in plain text without a link (by name
+  or alias) and names that may need a note; you answer link / create / skip
+  for each. `/link-check` lists every `[[link]]` that points at no note
+  (a missing project, a typo) and offers fix / create / unlink. Both read
+  through `.opencode/scripts/link-check.ps1`, which changes nothing; the
+  commands change a note only after you answer. Remove: delete the two
+  commands and the script.
 - Personal details: see the Personal data note in [[SETUP]].
 
 **Team management** (delegating and 1:1s)

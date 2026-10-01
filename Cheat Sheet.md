@@ -32,6 +32,8 @@ date is 2021-03-01", "what's blocked on Raj?").
 | `/status-update` | draft the weekly status update | `/status-update` |
 | `/report` | what got done in a range | `/report 2026-07-01 2026-09-30` · `/report 2026-07-01 2026-09-30 Alice` |
 | `/triage` | find overdue, blocked, stale, broken items | `/triage` |
+| `/link-check` | find `[[links]]` that point at no note; fix, create or unlink each | `/link-check` |
+| `/people-check` | find people named but not linked, and people with no note | `/people-check` · `/people-check 30` · `/people-check all` |
 | `/learn` | file something you found (how-to, query, instructions) as a Reference note, or record who supports a system | `/learn to find the server locking an account: <query>` · `/learn Alice supports LDAP and SSO` |
 | `/inbox` | sort captured lines one at a time into tasks, people, meetings, projects | `/inbox` |
 | `/transcript` | turn a Teams transcript into meeting notes: attendees, decisions, actions, commitments | `/transcript` · `/transcript platform sync` |
