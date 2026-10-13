@@ -1,0 +1,14 @@
+{
+  "instances": [
+    {
+      "id": "work",
+      "baseUrl": "https://graph.microsoft.com/v1.0",
+      "tokenVar": "MICROSOFT_TOKEN",
+      "credentialStore": "keyring",
+      "authMode": "oauth",
+      "clientId": "",
+      "calendarIds": [],
+      "tenant": "common"
+    }
+  ]
+}

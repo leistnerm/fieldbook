@@ -1,0 +1,68 @@
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("project")
+formulas:
+  projectGroup: if(parent.isEmpty(), file.asLink(), parent)
+views:
+- type: table
+  name: Active
+  filters:
+    and:
+    - status == "active"
+  groupBy:
+    property: area
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - status
+  - target
+  - parent
+- type: table
+  name: Paused
+  filters:
+    and:
+    - status == "paused"
+  order:
+  - file.name
+  - area
+  - parent
+  - target
+- type: table
+  name: Done
+  filters:
+    and:
+    - status == "done" || status == "dropped"
+  order:
+  - file.name
+  - area
+  - parent
+  - status
+  - target
+- type: table
+  name: By parent
+  filters:
+    and:
+    - status == "active"
+  order:
+  - file.name
+  - area
+  - status
+  - target
+  - owner
+  groupBy:
+    property: formula.projectGroup
+    direction: ASC
+- type: table
+  name: All
+  order:
+  - file.name
+  - area
+  - status
+  - target
+  - parent
+  sort:
+  - property: file.name
+    direction: ASC

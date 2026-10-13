@@ -1,0 +1,13 @@
+{
+  "instances": [
+    {
+      "id": "personal",
+      "baseUrl": "https://www.googleapis.com/calendar/v3",
+      "tokenVar": "GOOGLE_TOKEN",
+      "credentialStore": "keyring",
+      "authMode": "oauth",
+      "clientId": "",
+      "calendarIds": []
+    }
+  ]
+}

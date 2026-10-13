@@ -1,0 +1,10 @@
+{
+  "instances": [
+    {
+      "id": "school",
+      "baseUrl": "https://REPLACE-CANVAS-HOST",
+      "tokenVar": "CANVAS_TOKEN",
+      "courseIds": []
+    }
+  ]
+}

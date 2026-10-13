@@ -1,0 +1,156 @@
+# Optional area filter. Blank areas stay on Dashboard; specialized tabs are extra choices.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - area == "work"
+views:
+- type: table
+  name: Next actions
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+  order:
+  - file.name
+  - status
+  - priority
+  - type
+  - scheduled
+  - due
+  - projects
+  - assignee
+  sort:
+  - property: priority
+    direction: ASC
+  - property: due
+    direction: ASC
+- type: table
+  name: Upcoming
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - recurrence.isEmpty()
+    - '!due.isEmpty() && date(due) >= today() && date(due) <= today() + "14d"'
+  order:
+  - file.name
+  - due
+  - status
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Overdue
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - recurrence.isEmpty()
+    - '!due.isEmpty() && date(due) < today()'
+  order:
+  - file.name
+  - due
+  - status
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Blocked
+  filters:
+    and:
+    - file.hasTag("task")
+    - status == "blocked"
+  order:
+  - file.name
+  - priority
+  - projects
+  - assignee
+  sort:
+  - property: priority
+    direction: ASC
+- type: table
+  name: Projects
+  filters:
+    and:
+    - file.hasTag("project")
+    - status == "active"
+  order:
+  - file.name
+  - status
+  - target
+  - parent
+  sort:
+  - property: target
+    direction: ASC
+- type: table
+  name: Done last 7 days
+  filters:
+    and:
+    - file.hasTag("task")
+    - recurrence.isEmpty()
+    - status == "done"
+    - '!completedDate.isEmpty()'
+    - date(completedDate) >= today() - "6d"
+    - date(completedDate) < today() + "1d"
+  order:
+  - file.name
+  - completedDate
+  - projects
+  - assignee
+  sort:
+  - property: completedDate
+    direction: DESC
+- type: table
+  name: Delegated
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - '!assignee.isEmpty()'
+  order:
+  - file.name
+  - assignee
+  - status
+  - due
+  - projects
+- type: table
+  name: Report tasks
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - list(assignee).filter(value.isType("link") && value.asFile() && value.asFile().hasTag("person") && value.asFile().properties.relationship ==
+      "report" && (value.asFile().properties.status.isEmpty() || value.asFile().properties.status == "current")).length
+      > 0
+  order:
+  - file.name
+  - assignee
+  - status
+  - priority
+  - due
+  - projects
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: My open
+  filters:
+    and:
+    - file.hasTag("task") && status != "done" && status != "dropped"
+    - assignee.isEmpty() || list(assignee).filter(value.isType("link") && value.asFile() && value.asFile().hasTag("person") && value.asFile().properties.relationship
+      == "self").length > 0
+  order:
+  - file.name
+  - status
+  - priority
+  - scheduled
+  - due
+  - projects
+  sort:
+  - property: due
+    direction: ASC

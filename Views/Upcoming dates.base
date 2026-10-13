@@ -1,0 +1,162 @@
+# Optional shared date inventory; a date is context, not a new task or proof of coverage.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples") && !file.inFolder("Dashboards")'
+  - (file.hasTag("task") && status != "done" && status != "dropped" && recurrence.isEmpty()) || (file.hasTag("opportunity") && status != "closed" && status
+    != "declined" && status != "accepted") || (file.hasTag("decision") && status != "superseded") || (file.hasTag("item") && status != "returned" && status
+    != "disposed" && status != "sold" && status != "lost")
+formulas:
+  upcomingDate: if(file.hasTag("item"), if(!return_by.isEmpty() && date(return_by) >= today() && (warranty_end.isEmpty() || date(warranty_end) < today()
+    || date(return_by) <= date(warranty_end)), return_by, if(!warranty_end.isEmpty() && date(warranty_end) >= today(), warranty_end, "")), if(file.hasTag("task"),
+    due, if(file.hasTag("opportunity"), closing_date, if(file.hasTag("decision"), revisit, ""))))
+  pastDate: if(file.hasTag("item"), if(!return_by.isEmpty() && date(return_by) < today() && (warranty_end.isEmpty() || date(warranty_end) >= today() ||
+    date(return_by) <= date(warranty_end)), return_by, if(!warranty_end.isEmpty() && date(warranty_end) < today(), warranty_end, "")), if(file.hasTag("task"),
+    due, if(file.hasTag("opportunity"), closing_date, if(file.hasTag("decision"), revisit, ""))))
+  meaning: if(file.hasTag("task"), "Task deadline", if(file.hasTag("opportunity"), "Opportunity closes", if(file.hasTag("decision"), "Decision revisit",
+    "Return / warranty dates")))
+properties:
+  formula.upcomingDate:
+    displayName: Upcoming date
+  formula.pastDate:
+    displayName: Past date
+  formula.meaning:
+    displayName: Date meaning
+views:
+- type: table
+  name: Next 30 days
+  filters:
+    and:
+    - '!formula.upcomingDate.isEmpty() && date(formula.upcomingDate) >= today() && date(formula.upcomingDate) <= today() + "30d"'
+  order:
+  - file.name
+  - formula.meaning
+  - formula.upcomingDate
+  - area
+  - status
+  - due
+  - closing_date
+  - revisit
+  - return_by
+  - warranty_end
+  - projects
+  sort:
+  - property: formula.upcomingDate
+    direction: ASC
+- type: table
+  name: Past dates to review
+  filters:
+    and:
+    - '!formula.pastDate.isEmpty() && date(formula.pastDate) < today()'
+  order:
+  - file.name
+  - formula.meaning
+  - formula.pastDate
+  - area
+  - status
+  - due
+  - closing_date
+  - revisit
+  - return_by
+  - warranty_end
+  - projects
+  sort:
+  - property: formula.pastDate
+    direction: ASC
+- type: table
+  name: Task deadlines
+  filters:
+    and:
+    - file.hasTag("task") && !due.isEmpty()
+  order:
+  - file.name
+  - due
+  - area
+  - status
+  - projects
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Opportunity closing dates
+  filters:
+    and:
+    - file.hasTag("opportunity") && !closing_date.isEmpty()
+  order:
+  - file.name
+  - closing_date
+  - area
+  - status
+  - projects
+  sort:
+  - property: closing_date
+    direction: ASC
+- type: table
+  name: Decision revisits
+  filters:
+    and:
+    - file.hasTag("decision") && !revisit.isEmpty()
+  order:
+  - file.name
+  - revisit
+  - area
+  - status
+  - projects
+  sort:
+  - property: revisit
+    direction: ASC
+- type: table
+  name: Return dates
+  filters:
+    and:
+    - file.hasTag("item") && !return_by.isEmpty()
+  order:
+  - file.name
+  - return_by
+  - area
+  - status
+  - projects
+  sort:
+  - property: return_by
+    direction: ASC
+- type: table
+  name: Warranty dates
+  filters:
+    and:
+    - file.hasTag("item") && !warranty_end.isEmpty()
+  order:
+  - file.name
+  - warranty_end
+  - area
+  - status
+  - projects
+  sort:
+  - property: warranty_end
+    direction: ASC
+- type: table
+  name: Agreement renewals
+  filters:
+    and:
+      - file.hasTag("item") && !renewal_date.isEmpty()
+  order: [file.name, area, renewal_date, cancellation_notice_by, expiration_date, status]
+  sort:
+    - property: renewal_date
+      direction: ASC
+- type: table
+  name: Cancellation notice deadlines
+  filters:
+    and:
+      - file.hasTag("item") && !cancellation_notice_by.isEmpty()
+  order: [file.name, area, cancellation_notice_by, renewal_date, status]
+  sort:
+    - property: cancellation_notice_by
+      direction: ASC
+- type: table
+  name: Agreement expirations
+  filters:
+    and:
+      - file.hasTag("item") && !expiration_date.isEmpty()
+  order: [file.name, area, expiration_date, status]
+  sort:
+    - property: expiration_date
+      direction: ASC

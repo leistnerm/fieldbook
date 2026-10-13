@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "providers": {
+    "jira": {
+      "objects": [
+        "Issues",
+        "Configured issue date fields"
+      ],
+      "date_types": [
+        "due",
+        "completed"
+      ],
+      "excluded": [
+        "Subtask/epic traversal",
+        "Comments, attachments and worklogs",
+        "Unmapped custom dates"
+      ]
+    },
+    "agility": {
+      "objects": [
+        "Workitems",
+        "Configured scalar date attributes"
+      ],
+      "date_types": [],
+      "excluded": [
+        "Portfolio hierarchy traversal",
+        "Unmapped dates and timeboxes"
+      ]
+    },
+    "github": {
+      "objects": [
+        "Issues (pull requests excluded)",
+        "Milestone context"
+      ],
+      "date_types": [
+        "completed",
+        "milestone_target"
+      ],
+      "excluded": [
+        "Pull requests",
+        "Projects fields/iterations",
+        "Issue deadlines (milestone target is context)"
+      ]
+    },
+    "azure": {
+      "objects": [
+        "Work items",
+        "Configured date field references",
+        "Area and iteration paths"
+      ],
+      "date_types": [],
+      "excluded": [
+        "Iteration calendar expansion",
+        "Unmapped process/custom dates"
+      ]
+    },
+    "canvas": {
+      "objects": [
+        "Assignments",
+        "Quizzes",
+        "Discussion deadlines/checkpoints",
+        "Planner items",
+        "Calendar events",
+        "Announcements"
+      ],
+      "date_types": [
+        "due",
+        "todo",
+        "event_start",
+        "event_end",
+        "available_from",
+        "closes_at",
+        "posted",
+        "planner"
+      ],
+      "excluded": [
+        "Grades/submissions",
+        "Rosters",
+        "Discussion replies",
+        "Undated/inaccessible items outside selected endpoints"
+      ]
+    },
+    "google": {
+      "objects": [
+        "Selected calendar events",
+        "Expanded occurrences and series seen in the window"
+      ],
+      "date_types": [
+        "event_start",
+        "event_end",
+        "original_occurrence"
+      ],
+      "excluded": [
+        "Mail",
+        "Attachments",
+        "Group expansion",
+        "Series with no occurrence in the window"
+      ]
+    },
+    "microsoft": {
+      "objects": [
+        "Signed-in account selected calendars",
+        "Expanded occurrences and series seen in the window"
+      ],
+      "date_types": [
+        "event_start",
+        "event_end",
+        "original_occurrence"
+      ],
+      "excluded": [
+        "Mail",
+        "Attachments",
+        "Shared/delegated mailbox routes",
+        "Local Outlook/PST (use ICS)",
+        "Series with no occurrence in the window"
+      ]
+    },
+    "ics": {
+      "objects": [
+        "Local VEVENT snapshot",
+        "Explicit occurrence identifiers"
+      ],
+      "date_types": [
+        "event_start",
+        "event_end",
+        "original_occurrence"
+      ],
+      "excluded": [
+        "Live refresh",
+        "Recurrence expansion",
+        "Custom timezone rules"
+      ]
+    }
+  }
+}

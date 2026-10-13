@@ -1,0 +1,13 @@
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("note")
+views:
+- type: table
+  name: Notes
+  order:
+  - file.name
+  - area
+  - projects
+  - source

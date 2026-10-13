@@ -1,0 +1,39 @@
+# Optional local-link inventory for any area and record type. Never contacts a tracker. Jira candidates require an explicitly Jira-linked project; a missing tracker field alone is not a problem.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+views:
+- type: table
+  name: Linked
+  filters:
+    and:
+    - ((!jira.isEmpty() && jira != "none") || (!agility.isEmpty() && agility != "none") || (!github.isEmpty() &&
+      github != "none") || (!azure.isEmpty() && azure != "none"))
+  order:
+  - file.name
+  - area
+  - tags
+  - status
+  - jira
+  - jira_instance
+  - agility
+  - agility_instance
+  - github
+  - github_instance
+  - azure
+  - azure_instance
+- type: table
+  name: Jira candidates
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - jira.isEmpty()
+    - list(projects).filter(value.isType("link") && value.asFile() && !value.asFile().properties.jira.isEmpty()
+      && value.asFile().properties.jira != "none").length > 0
+  order:
+  - file.name
+  - area
+  - status
+  - projects

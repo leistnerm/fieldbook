@@ -1,0 +1,146 @@
+# Optional area filter. Blank areas stay on Dashboard; specialized tabs are extra choices.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - area == "school"
+views:
+- type: table
+  name: Next actions
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+  order:
+  - file.name
+  - status
+  - priority
+  - type
+  - scheduled
+  - due
+  - projects
+  - assignee
+  sort:
+  - property: priority
+    direction: ASC
+  - property: due
+    direction: ASC
+- type: table
+  name: Upcoming
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - recurrence.isEmpty()
+    - '!due.isEmpty() && date(due) >= today() && date(due) <= today() + "14d"'
+  order:
+  - file.name
+  - due
+  - status
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Overdue
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - recurrence.isEmpty()
+    - '!due.isEmpty() && date(due) < today()'
+  order:
+  - file.name
+  - due
+  - status
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Blocked
+  filters:
+    and:
+    - file.hasTag("task")
+    - status == "blocked"
+  order:
+  - file.name
+  - priority
+  - projects
+  - assignee
+  sort:
+  - property: priority
+    direction: ASC
+- type: table
+  name: Projects
+  filters:
+    and:
+    - file.hasTag("project")
+    - status == "active"
+  order:
+  - file.name
+  - status
+  - target
+  - parent
+  sort:
+  - property: target
+    direction: ASC
+- type: table
+  name: Done last 7 days
+  filters:
+    and:
+    - file.hasTag("task")
+    - recurrence.isEmpty()
+    - status == "done"
+    - '!completedDate.isEmpty()'
+    - date(completedDate) >= today() - "6d"
+    - date(completedDate) < today() + "1d"
+  order:
+  - file.name
+  - completedDate
+  - projects
+  - assignee
+  sort:
+  - property: completedDate
+    direction: DESC
+- type: table
+  name: Courses
+  filters:
+    and:
+    - file.hasTag("course")
+    - status == "active"
+  order:
+  - file.name
+  - term
+  - code
+  - instructor
+  - target
+- type: table
+  name: Past courses
+  filters:
+    and:
+    - file.hasTag("course")
+    - status == "done" || status == "dropped"
+  order:
+  - file.name
+  - term
+  - status
+- type: table
+  name: My open
+  filters:
+    and:
+    - file.hasTag("task") && status != "done" && status != "dropped"
+    - assignee.isEmpty() || list(assignee).filter(value.isType("link") && value.asFile() && value.asFile().hasTag("person") && value.asFile().properties.relationship
+      == "self").length > 0
+  order:
+  - file.name
+  - status
+  - priority
+  - scheduled
+  - due
+  - projects
+  sort:
+  - property: due
+    direction: ASC

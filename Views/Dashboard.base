@@ -1,0 +1,334 @@
+# Shared across every area, including unset. Date-focused lists exclude recurring tasks; use TaskNotes for instances. No Jira decision is a legacy optional tab scoped to Jira-linked projects; Done in range defaults to a rolling 90 days.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("task")
+formulas:
+  isOpen: status != "done" && status != "dropped"
+views:
+- type: table
+  name: Now
+  filters:
+    and:
+    - formula.isOpen
+    - recurrence.isEmpty()
+    - status != "blocked"
+    - status == "active" || (!scheduled.isEmpty() && date(scheduled) <= today()) || (!due.isEmpty() && date(due)
+      <= today())
+  order:
+  - file.name
+  - area
+  - priority
+  - scheduled
+  - due
+  - projects
+  - assignee
+  sort:
+  - property: priority
+    direction: ASC
+  - property: due
+    direction: ASC
+- type: table
+  name: Upcoming
+  filters:
+    and:
+    - formula.isOpen
+    - '!due.isEmpty() && date(due) >= today() && date(due) <= today() + "14d"'
+    - recurrence.isEmpty()
+  order:
+  - file.name
+  - area
+  - due
+  - scheduled
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Open by priority
+  filters:
+    and:
+    - formula.isOpen
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - type
+  - projects
+  - assignee
+  - due
+  sort:
+  - property: priority
+    direction: ASC
+  - property: due
+    direction: ASC
+- type: tasknotesKanban
+  name: Kanban
+  filters:
+    and:
+    - status != "dropped"
+  order:
+  - priority
+  - due
+  - assignee
+  groupBy:
+    property: status
+    direction: ASC
+- type: table
+  name: Open by project
+  filters:
+    and:
+    - formula.isOpen
+  groupBy:
+    property: projects
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - due
+  - assignee
+  sort:
+  - property: priority
+    direction: ASC
+- type: table
+  name: Open by type
+  filters:
+    and:
+    - formula.isOpen
+  groupBy:
+    property: type
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - due
+  - assignee
+- type: table
+  name: Open by tag
+  filters:
+    and:
+    - formula.isOpen
+  groupBy:
+    property: tags
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - due
+  - assignee
+- type: table
+  name: Delegated
+  filters:
+    and:
+    - formula.isOpen
+    - '!assignee.isEmpty()'
+  groupBy:
+    property: assignee
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - due
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: Overdue
+  filters:
+    and:
+    - formula.isOpen
+    - '!due.isEmpty()'
+    - date(due) < today()
+    - recurrence.isEmpty()
+  order:
+  - file.name
+  - area
+  - due
+  - priority
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: No Jira decision
+  filters:
+    and:
+    - formula.isOpen
+    - jira.isEmpty()
+    - list(projects).filter(value.isType("link") && value.asFile() && !value.asFile().properties.jira.isEmpty()
+      && value.asFile().properties.jira != "none").length > 0
+  order:
+  - file.name
+  - area
+  - type
+  - projects
+  - assignee
+  - status
+  sort:
+  - property: priority
+    direction: ASC
+- type: table
+  name: Blocked
+  filters:
+    and:
+    - status == "blocked"
+  order:
+  - file.name
+  - area
+  - priority
+  - assignee
+  - dateModified
+- type: table
+  name: Recurring
+  filters:
+    and:
+    - '!recurrence.isEmpty()'
+  order:
+  - file.name
+  - area
+  - scheduled
+  - recurrence
+  - complete_instances
+  - assignee
+- type: table
+  name: Done last 7 days
+  filters:
+    and:
+    - recurrence.isEmpty()
+    - status == "done"
+    - '!completedDate.isEmpty()'
+    - date(completedDate) >= today() - "6d"
+    - date(completedDate) < today() + "1d"
+  order:
+  - file.name
+  - area
+  - completedDate
+  - type
+  - projects
+  - assignee
+  sort:
+  - property: completedDate
+    direction: DESC
+- type: table
+  name: Done last 30 days
+  filters:
+    and:
+    - recurrence.isEmpty()
+    - status == "done"
+    - '!completedDate.isEmpty()'
+    - date(completedDate) >= today() - "29d"
+    - date(completedDate) < today() + "1d"
+  groupBy:
+    property: type
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - completedDate
+  - projects
+  - assignee
+  sort:
+  - property: completedDate
+    direction: DESC
+- type: table
+  name: Done in range
+  filters:
+    and:
+    - recurrence.isEmpty()
+    - status == "done"
+    - '!completedDate.isEmpty()'
+    - date(completedDate) >= today() - "89d"
+    - date(completedDate) < today() + "1d"
+  groupBy:
+    property: type
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - completedDate
+  - projects
+  - assignee
+  sort:
+  - property: completedDate
+    direction: ASC
+- type: table
+  name: Open by area
+  filters:
+    and:
+    - formula.isOpen
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - scheduled
+  - due
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+  groupBy:
+    property: area
+    direction: ASC
+- type: table
+  name: No area
+  filters:
+    and:
+    - formula.isOpen
+    - area.isEmpty()
+  order:
+  - file.name
+  - status
+  - priority
+  - scheduled
+  - due
+  - projects
+  - assignee
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: My open
+  filters:
+    and:
+    - formula.isOpen
+    - assignee.isEmpty() || list(assignee).filter(value.isType("link") && value.asFile() && value.asFile().hasTag("person") && value.asFile().properties.relationship
+      == "self").length > 0
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - scheduled
+  - due
+  - projects
+  sort:
+  - property: due
+    direction: ASC
+- type: table
+  name: All tasks
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - type
+  - projects
+  - assignee
+  - due
+  sort:
+  - property: file.name
+    direction: ASC

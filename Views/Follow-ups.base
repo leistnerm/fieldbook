@@ -1,0 +1,46 @@
+filters:
+  and:
+    - file.ext == "md"
+    - '!file.inFolder("Templates") && !file.inFolder("Examples") && !file.inFolder("Dashboards")'
+views:
+  - type: table
+    name: Blocked tasks
+    filters:
+      and:
+        - file.hasTag("task") && status == "blocked"
+    order: [file.name, area, due, assignee, projects]
+    sort:
+      - property: due
+        direction: ASC
+  - type: table
+    name: Assigned tasks
+    filters:
+      and:
+        - file.hasTag("task") && status != "done" && status != "dropped" && !assignee.isEmpty()
+    order: [file.name, area, assignee, status, due, projects]
+  - type: table
+    name: Overdue check-ins
+    filters:
+      and:
+        - '!check_in.isEmpty() && date(check_in) < today()'
+        - status != "done" && status != "dropped" && status != "superseded"
+    order: [file.name, check_in, area, status]
+    sort:
+      - property: check_in
+        direction: ASC
+  - type: table
+    name: Upcoming check-ins
+    filters:
+      and:
+        - '!check_in.isEmpty() && date(check_in) >= today() && date(check_in) <= today() + "14d"'
+        - status != "done" && status != "dropped" && status != "superseded"
+    order: [file.name, check_in, area, status]
+    sort:
+      - property: check_in
+        direction: ASC
+  - type: table
+    name: Projects to review
+    filters:
+      and:
+        - file.hasTag("project") && status == "active"
+    order: [file.name, area, target, owner]

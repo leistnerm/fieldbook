@@ -1,0 +1,17 @@
+{
+  "id": "0001",
+  "title": "Person contact fields",
+  "tag": "person",
+  "ops": [
+    { "op": "toLabeledList", "from": "personalEmail", "to": "otherEmails", "label": "personal" },
+    { "op": "toLabeledList", "from": "personalPhone", "to": "otherPhones", "label": "personal" },
+    { "op": "addKey", "key": "employeeNumber", "value": "" },
+    { "op": "addKey", "key": "workMobile", "value": "" },
+    { "op": "addKey", "key": "otherEmails", "value": "[]" },
+    { "op": "addKey", "key": "otherPhones", "value": "[]" },
+    { "op": "addKey", "key": "addresses", "value": "[]" },
+    { "op": "addKey", "key": "usernames", "value": "[]" },
+    { "op": "addKey", "key": "supports", "value": "[]" }
+  ],
+  "note": "The new person fields are described in AGENTS.md > People."
+}

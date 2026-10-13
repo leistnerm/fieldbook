@@ -1,0 +1,73 @@
+# Shared items, including unknown ownership. Purchase, loan and date tabs are optional; a recorded date does not establish current coverage or a pending action.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("item")
+views:
+- type: table
+  name: All
+  order:
+  - file.name
+  - area
+  - category
+  - status
+  - owner
+  - location
+  - projects
+  sort:
+  - property: file.name
+    direction: ASC
+- type: table
+  name: Loans
+  filters:
+    and:
+    - status == "borrowed" || status == "lent"
+  order:
+  - file.name
+  - area
+  - status
+  - owner
+  - location
+  - projects
+- type: table
+  name: Purchase details
+  filters:
+    and:
+    - '!purchased.isEmpty() || !receipt.isEmpty() || !purchase_price.isEmpty()'
+  order:
+  - file.name
+  - area
+  - purchased
+  - vendor
+  - purchase_price
+  - currency
+  - receipt
+- type: table
+  name: Return dates
+  filters:
+    and:
+    - '!return_by.isEmpty()'
+  order:
+  - file.name
+  - area
+  - status
+  - return_by
+  - receipt
+  sort:
+  - property: return_by
+    direction: ASC
+- type: table
+  name: Warranty dates
+  filters:
+    and:
+    - '!warranty_end.isEmpty()'
+  order:
+  - file.name
+  - area
+  - status
+  - warranty_end
+  - receipt
+  sort:
+  - property: warranty_end
+    direction: ASC

@@ -1,0 +1,54 @@
+{
+  "plugins": [
+    {
+      "id": "tasknotes",
+      "repo": "callumalpass/tasknotes",
+      "version": "4.13.8",
+      "release": "https://github.com/callumalpass/tasknotes/releases/tag/4.13.8",
+      "assets": [
+        {
+          "name": "main.js",
+          "url": "https://github.com/callumalpass/tasknotes/releases/download/4.13.8/main.js",
+          "sha256": "ba429c5476048d4bc5ffa53068d803f11c79b3f6af24cc407a09e98c85bea092"
+        },
+        {
+          "name": "manifest.json",
+          "url": "https://github.com/callumalpass/tasknotes/releases/download/4.13.8/manifest.json",
+          "sha256": "c40b0e32365e7fcd793345f5da043d9c5dc325d662c05a4c88690e08cdf452e1"
+        },
+        {
+          "name": "styles.css",
+          "url": "https://github.com/callumalpass/tasknotes/releases/download/4.13.8/styles.css",
+          "sha256": "78b552593f5ebdd3dffdedfe3eee88e05a43e785e82db07660029a788f763546"
+        }
+      ]
+    },
+    {
+      "id": "templater-obsidian",
+      "repo": "SilentVoid13/Templater",
+      "version": "2.25.1",
+      "release": "https://github.com/SilentVoid13/Templater/releases/tag/2.25.1",
+      "assets": [
+        {
+          "name": "main.js",
+          "url": "https://github.com/SilentVoid13/Templater/releases/download/2.25.1/main.js",
+          "sha256": "eb86d9282694ce1f099154c320286fdd89473e60dc2441ee310f3ac331333e94"
+        },
+        {
+          "name": "manifest.json",
+          "url": "https://github.com/SilentVoid13/Templater/releases/download/2.25.1/manifest.json",
+          "sha256": "b99280d2c4ab2cd22ad010c12faeedf255bcf385d127d973b89f85deb27d23fd"
+        },
+        {
+          "name": "styles.css",
+          "url": "https://github.com/SilentVoid13/Templater/releases/download/2.25.1/styles.css",
+          "sha256": "67a6dd2d1d6dedca1287c334ca884ec4196433f71ca47388a0bd3eac14cf8b5f"
+        }
+      ],
+      "source": {
+        "url": "https://codeload.github.com/SilentVoid13/Templater/tar.gz/refs/tags/2.25.1",
+        "sha256": "55db7524bd92f2805ba5e5d9f7f3e8053e1f616e6c07057167d81b90d19ba67d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  ".obsidian/app.json": {
+    "alwaysUpdateLinks": true,
+    "newLinkFormat": "shortest",
+    "useMarkdownLinks": false,
+    "attachmentFolderPath": "Attachments"
+  },
+  ".obsidian/core-plugins.json": [
+    "file-explorer",
+    "global-search",
+    "switcher",
+    "graph",
+    "backlink",
+    "outgoing-link",
+    "tag-pane",
+    "page-preview",
+    "note-composer",
+    "command-palette",
+    "editor-status",
+    "bookmarks",
+    "outline",
+    "word-count",
+    "file-recovery",
+    "properties",
+    "bases",
+    "canvas"
+  ],
+  ".obsidian/community-plugins.json": [
+    "tasknotes",
+    "templater-obsidian"
+  ],
+  ".obsidian/plugins/tasknotes/data.json": {
+    "tasksFolder": "Tasks",
+    "archiveFolder": "Tasks/Archive",
+    "moveArchivedTasks": false,
+    "taskTag": "task",
+    "taskIdentificationMethod": "tag",
+    "excludedFolders": "Templates,Examples",
+    "defaultTaskPriority": "2-normal",
+    "defaultTaskStatus": "backlog",
+    "taskFilenameFormat": "title",
+    "storeTitleInFilename": false,
+    "customFilenameTemplate": "{{title}}",
+    "inlineTaskConvertFolder": "Tasks",
+    "enableInstantTaskConvert": true,
+    "taskCreationDefaults": {
+      "useParentNoteForTaskCreation": false,
+      "useParentNoteAsProject": false,
+      "useParentHeaderAsProject": false,
+      "inheritParentTaskProperties": false,
+      "defaultScheduledDate": "none",
+      "useBodyTemplate": true,
+      "bodyTemplate": "Templates/Task body.md"
+    },
+    "customStatuses": [
+      {
+        "id": "backlog",
+        "value": "backlog",
+        "label": "Backlog",
+        "color": "#808080",
+        "isCompleted": false,
+        "excludeFromCycle": false,
+        "order": 0,
+        "autoArchive": false,
+        "autoArchiveDelay": 5
+      },
+      {
+        "id": "active",
+        "value": "active",
+        "label": "Active",
+        "color": "#0066cc",
+        "isCompleted": false,
+        "excludeFromCycle": false,
+        "order": 1,
+        "autoArchive": false,
+        "autoArchiveDelay": 5
+      },
+      {
+        "id": "blocked",
+        "value": "blocked",
+        "label": "Blocked",
+        "color": "#cc6600",
+        "isCompleted": false,
+        "excludeFromCycle": false,
+        "order": 2,
+        "autoArchive": false,
+        "autoArchiveDelay": 5
+      },
+      {
+        "id": "done",
+        "value": "done",
+        "label": "Done",
+        "color": "#00aa00",
+        "isCompleted": true,
+        "excludeFromCycle": false,
+        "order": 3,
+        "autoArchive": false,
+        "autoArchiveDelay": 5
+      },
+      {
+        "id": "dropped",
+        "value": "dropped",
+        "label": "Dropped",
+        "color": "#999999",
+        "isCompleted": true,
+        "excludeFromCycle": false,
+        "order": 4,
+        "autoArchive": false,
+        "autoArchiveDelay": 5
+      }
+    ],
+    "customPriorities": [
+      {
+        "id": "1-high",
+        "value": "1-high",
+        "label": "High",
+        "color": "#cc3300",
+        "weight": 3
+      },
+      {
+        "id": "2-normal",
+        "value": "2-normal",
+        "label": "Normal",
+        "color": "#ffaa00",
+        "weight": 2
+      },
+      {
+        "id": "3-low",
+        "value": "3-low",
+        "label": "Low",
+        "color": "#00aa00",
+        "weight": 1
+      }
+    ],
+    "projectAutosuggest": {
+      "enableFuzzy": true,
+      "rows": [
+        "{title|n(Title)}",
+        "{aliases|n(Aliases)}",
+        "{file.path|n(Path)}"
+      ],
+      "requiredTags": [
+        "project"
+      ],
+      "includeFolders": []
+    },
+    "userFields": [
+      {
+        "id": "type",
+        "key": "type",
+        "displayName": "Type",
+        "type": "text"
+      },
+      {
+        "id": "area",
+        "key": "area",
+        "displayName": "Area",
+        "type": "text"
+      },
+      {
+        "id": "assignee",
+        "key": "assignee",
+        "displayName": "Assignee",
+        "type": "list"
+      },
+      {
+        "id": "requester",
+        "key": "requester",
+        "displayName": "Requester",
+        "type": "text"
+      }
+    ],
+    "enableBases": true,
+    "enableMdbaseSpec": false,
+    "autoCreateDefaultBasesFiles": true,
+    "commandFileMapping": {
+      "open-calendar-view": "Views/mini-calendar-default.base",
+      "open-kanban-view": "Views/kanban-default.base",
+      "open-tasks-view": "Views/tasks-default.base",
+      "open-advanced-calendar-view": "Views/calendar-default.base",
+      "open-agenda-view": "Views/agenda-default.base",
+      "pomodoro-stats-base": "Views/pomodoro-stats.base",
+      "relationships": "Views/relationships.base"
+    },
+    "enableAPI": false,
+    "enableMCP": false,
+    "enableGoogleCalendar": false,
+    "enableMicrosoftCalendar": false,
+    "starterNoteCreated": true,
+    "lastSeenVersion": "4.13.8"
+  },
+  ".obsidian/plugins/templater-obsidian/data.json": {
+    "data_version": 2,
+    "templates_folder": "Templates",
+    "trigger_on_file_creation_mode": "none",
+    "startup_templates": [],
+    "user_scripts_folder": "",
+    "shell_path": "",
+    "templates_pairs": [],
+    "folder_templates": [],
+    "file_templates": []
+  }
+}

@@ -1,0 +1,37 @@
+# Obsidian per-device UI state — changes constantly, nothing to keep
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Raw Teams transcripts and unreviewed conversions stay out of git;
+# only converted notes you choose to keep (Transcripts/*.md) are tracked
+Transcripts/*.vtt
+Transcripts/.work/
+
+# Raw calendar exports and machine-local configuration recovery
+Attachments/**/*.ics
+.fieldbook/config-backups/
+
+# opencode's plugin install files
+fieldbook_core/node_modules
+fieldbook_core/bun.lock
+
+# Local dependency installs and update scratch files
+node_modules/
+*.fieldbook-new
+fieldbook_core/.venv/
+__pycache__/
+*.pyc
+.fieldbook-*.tmp
+
+# Machine-local AI setup and recovery (not public kit content)
+.fieldbook/ai.json
+.fieldbook/ai-backups/
+.fieldbook/legacy-ai-runtime/
+.fieldbook/mcp-connection.json
+.mcp.json
+.codex/config.toml
+.cursor/mcp.json
+.vscode/mcp.json
+.gemini/settings.json

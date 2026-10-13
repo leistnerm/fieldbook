@@ -1,0 +1,34 @@
+# All includes undated records. Recent covers the last 90 calendar days through today; metrics and reviews are not required.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("accomplishment")
+views:
+- type: table
+  name: All
+  order:
+  - file.name
+  - note.date
+  - area
+  - projects
+  - person
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: Recent
+  order:
+  - file.name
+  - note.date
+  - area
+  - projects
+  - person
+  filters:
+    and:
+    - '!note.date.isEmpty()'
+    - date(note.date) >= today() - "89d"
+    - date(note.date) < today() + "1d"
+  sort:
+  - property: note.date
+    direction: DESC

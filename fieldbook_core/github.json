@@ -1,0 +1,13 @@
+{
+  "instances": [{
+    "id": "personal",
+    "baseUrl": "https://api.github.com",
+    "apiVersion": "2026-03-10",
+    "tokenVar": "GITHUB_TOKEN",
+    "repositories": [],
+    "login": "",
+    "labels": [],
+    "statusMap": {},
+    "resolutionMap": {}
+  }]
+}

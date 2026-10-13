@@ -1,0 +1,13 @@
+{
+  "instances": [
+    {
+      "id": "office",
+      "baseUrl": "https://REPLACE-AGILITY-HOST/REPLACE-INSTANCE",
+      "tokenVar": "AGILITY_TOKEN",
+      "memberId": "",
+      "where": {},
+      "statusMap": {},
+      "dateFields": {}
+    }
+  ]
+}

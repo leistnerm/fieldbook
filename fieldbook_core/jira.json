@@ -1,0 +1,14 @@
+{
+  "instances": [
+    {
+      "id": "office",
+      "baseUrl": "https://REPLACE-JIRA-HOST",
+      "flavor": "cloud",
+      "email": "",
+      "tokenVar": "JIRA_TOKEN",
+      "filter": "",
+      "statusMap": {},
+      "dateFields": {}
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "1": [
+    "Setup",
+    [
+      [
+        "onboard",
+        "Guided onboarding"
+      ],
+      [
+        "1",
+        "Setups and work role"
+      ],
+      [
+        "2",
+        "Features"
+      ],
+      [
+        "4",
+        "Preview settings"
+      ],
+      [
+        "5",
+        "Save settings"
+      ],
+      [
+        "ai",
+        "AI assistants and optional MCP"
+      ]
+    ]
+  ],
+  "2": [
+    "Daily use",
+    [
+      [
+        "daily",
+        "Daily review"
+      ],
+      [
+        "weekly",
+        "Weekly review"
+      ],
+      [
+        "create",
+        "Create a record"
+      ],
+      [
+        "calendar",
+        "Calendar meeting picker"
+      ],
+      [
+        "followups",
+        "Follow-ups"
+      ],
+      [
+        "cadence",
+        "Manager 1:1 cadence"
+      ],
+      [
+        "intake",
+        "Selected source intake"
+      ],
+      [
+        "export",
+        "Selected export"
+      ]
+    ]
+  ],
+  "3": [
+    "Integrations",
+    [
+      [
+        "10",
+        "Guided setup and test"
+      ],
+      [
+        "6",
+        "Test saved connections"
+      ],
+      [
+        "7",
+        "Default scopes"
+      ],
+      [
+        "8",
+        "Link Project, Course or Series"
+      ],
+      [
+        "9",
+        "Calendar sign-in"
+      ],
+      [
+        "11",
+        "Credential instructions"
+      ],
+      [
+        "14",
+        "Coverage summary"
+      ],
+      [
+        "activity",
+        "Saved activity"
+      ],
+      [
+        "sync-preview",
+        "Sync conflict preview (selected proposal)"
+      ]
+    ]
+  ],
+  "4": [
+    "Maintenance",
+    [
+      [
+        "backup",
+        "Back up vault"
+      ],
+      [
+        "doctor",
+        "Check vault"
+      ],
+      [
+        "12",
+        "Upgrade"
+      ],
+      [
+        "13",
+        "Restore"
+      ],
+      [
+        "compare",
+        "Compare upgrade candidates"
+      ]
+    ]
+  ]
+}

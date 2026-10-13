@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "path": "Dashboard.md",
+      "navigation": "dashboard"
+    },
+    {
+      "path": "Templates/Project - Course.md",
+      "setup": "school"
+    },
+    {
+      "path": "Templates/Task - Assignment.md",
+      "setup": "school"
+    },
+    {
+      "path": "Templates/Person - Direct report.md",
+      "setup": "work",
+      "workRole": "people-manager"
+    },
+    {
+      "path": "Templates/Review-format.md",
+      "setup": "work",
+      "feature": "reviews",
+      "seed": true
+    },
+    {
+      "path": "fieldbook_core/commands/course.md",
+      "setup": "school",
+      "description": "Set up a course and term from supplied syllabus information"
+    },
+    {
+      "path": "fieldbook_core/commands/term-close.md",
+      "setup": "school",
+      "description": "Review and close a school term without deleting records"
+    },
+    {
+      "path": "fieldbook_core/commands/home.md",
+      "setup": "personal",
+      "description": "Organize errands, renewals or household work"
+    },
+    {
+      "path": "fieldbook_core/commands/coach.md",
+      "setup": "work",
+      "workRole": "people-manager",
+      "description": "Prepare a manager coaching or delegation conversation"
+    },
+    {
+      "path": "fieldbook_core/commands/review.md",
+      "setup": "work",
+      "feature": "reviews",
+      "description": "Prepare a mid-year or year-end self-evaluation or report review"
+    },
+    {
+      "path": "fieldbook_core/commands/evidence.md",
+      "setup": "work",
+      "feature": "reviews",
+      "description": "Gather evidence for a self-evaluation or report review"
+    },
+    {
+      "path": "fieldbook_core/skills/manager-coaching/SKILL.md",
+      "setup": "work",
+      "workRole": "people-manager",
+      "description": "Prepare manager 1:1 agendas, delegation follow-ups, and development conversations from recorded evidence."
+    },
+    {
+      "path": "fieldbook_core/skills/personal-admin/SKILL.md",
+      "setup": "personal",
+      "description": "Organize household projects, errands, renewals, and recurring personal responsibilities."
+    },
+    {
+      "path": "fieldbook_core/skills/review-evidence/SKILL.md",
+      "setup": "work",
+      "feature": "reviews",
+      "description": "Prepare evidence-backed mid-year or year-end self-evaluations for either work role, and report reviews for people managers."
+    },
+    {
+      "path": "Dashboards/Personal.md",
+      "setup": "personal"
+    },
+    {
+      "path": "Setups/Household.md",
+      "setup": "personal"
+    },
+    {
+      "path": "Dashboards/School.md",
+      "setup": "school"
+    },
+    {
+      "path": "Dashboards/Work.md",
+      "setup": "work",
+      "navigation": "work"
+    },
+    {
+      "path": "Setups/Work specializations.md",
+      "setup": "work"
+    },
+    {
+      "path": "Dashboards/Work - Individual contributor.md",
+      "setup": "work",
+      "workRole": "individual-contributor"
+    },
+    {
+      "path": "Dashboards/People management.md",
+      "setup": "work",
+      "workRole": "people-manager"
+    },
+    {
+      "path": "fieldbook_core/commands/jira-sync.md",
+      "feature": "jira",
+      "description": "Read Jira and preview Fieldbook updates"
+    },
+    {
+      "path": "fieldbook_core/commands/agility-sync.md",
+      "feature": "agility",
+      "description": "Read Digital.ai Agility and preview Fieldbook updates"
+    },
+    {
+      "path": "fieldbook_core/commands/github-sync.md",
+      "feature": "github",
+      "description": "Read GitHub Issues and preview Fieldbook updates in any setup"
+    },
+    {
+      "path": "fieldbook_core/commands/azure-sync.md",
+      "feature": "azure",
+      "description": "Read Azure Boards and preview Fieldbook updates in any setup"
+    },
+    {
+      "path": "fieldbook_core/commands/jira-check.md",
+      "feature": "jira",
+      "description": "Find relevant tasks that may need Jira visibility and draft issues"
+    },
+    {
+      "path": "fieldbook_core/commands/jira-status.md",
+      "feature": "jira",
+      "description": "Read one Jira issue and compare with a local item"
+    },
+    {
+      "path": "fieldbook_core/commands/jira-comment.md",
+      "feature": "jira",
+      "description": "Draft a Jira comment for the user to paste"
+    },
+    {
+      "path": "fieldbook_core/commands/canvas-sync.md",
+      "setup": "school",
+      "feature": "canvas",
+      "description": "Read Canvas coursework, quizzes, discussion deadlines and Planner"
+    },
+    {
+      "path": "fieldbook_core/skills/canvas-school/SKILL.md",
+      "setup": "school",
+      "feature": "canvas",
+      "description": "Deduplicate Canvas coursework and distinguish source date types"
+    }
+  ],
+  "retiredPaths": [
+    "Setups/Personal.md",
+    "Setups/Work.md",
+    "Setups/School.md",
+    "Setups/Work - Individual contributor.md",
+    "Setups/Work - People manager.md"
+  ]
+}

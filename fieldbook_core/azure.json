@@ -1,0 +1,15 @@
+{
+  "instances": [
+    {
+      "id": "office",
+      "baseUrl": "https://dev.azure.com/REPLACE-ORGANIZATION",
+      "tokenVar": "AZURE_TOKEN",
+      "project": "",
+      "filter": "",
+      "dueField": "",
+      "completionField": "",
+      "statusMap": {},
+      "dateFields": {}
+    }
+  ]
+}

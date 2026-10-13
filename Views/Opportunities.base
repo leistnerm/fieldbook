@@ -1,0 +1,41 @@
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("opportunity")
+views:
+- type: table
+  name: Open
+  order:
+  - file.name
+  - area
+  - kind
+  - status
+  - closing_date
+  - projects
+  filters:
+    and:
+    - '!(status == "closed" || status == "declined" || status == "accepted")'
+  sort:
+  - property: closing_date
+    direction: ASC
+- type: table
+  name: Closed
+  filters:
+    and:
+    - status == "closed" || status == "declined" || status == "accepted"
+  order:
+  - file.name
+  - area
+  - kind
+  - status
+  - closing_date
+- type: table
+  name: All
+  order:
+  - file.name
+  - area
+  - kind
+  - status
+  - closing_date
+  - organization

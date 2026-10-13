@@ -1,0 +1,12 @@
+filters:
+  and:
+    - file.ext == "md"
+    - '!file.inFolder("Templates") && !file.inFolder("Examples") && !file.inFolder("Dashboards")'
+    - file.hasTag("goal")
+views:
+  - type: table
+    name: Goals
+    order: [file.name, area, status, target, check_in, projects, evidence]
+    sort:
+      - property: target
+        direction: ASC

@@ -1,0 +1,77 @@
+# Active is the shared default; Series is for embedding in a series note.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("decision")
+views:
+- type: table
+  name: Active
+  filters:
+    and:
+    - status != "superseded"
+  order:
+  - file.name
+  - area
+  - note.date
+  - status
+  - revisit
+  - projects
+  - series
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: Due for revisit
+  filters:
+    and:
+    - status != "superseded" && ((!revisit.isEmpty() && date(revisit) <= today() + "14d") || (status == "revisit" && revisit.isEmpty()))
+  order:
+  - file.name
+  - area
+  - revisit
+  - note.date
+  - series
+  sort:
+  - property: revisit
+    direction: ASC
+- type: table
+  name: By project
+  filters:
+    and:
+    - status != "superseded"
+  groupBy:
+    property: projects
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - note.date
+  - status
+- type: table
+  name: Superseded
+  filters:
+    and:
+    - status == "superseded"
+  order:
+  - file.name
+  - area
+  - note.date
+  - superseded_by
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: Series
+  filters:
+    and:
+    - series == this.file.asLink()
+  order:
+  - file.name
+  - area
+  - note.date
+  - status
+  - revisit
+  sort:
+  - property: note.date
+    direction: DESC

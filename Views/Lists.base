@@ -1,0 +1,25 @@
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("list")
+views:
+- type: table
+  name: All
+  order:
+  - file.name
+  - area
+  - category
+  - projects
+  sort:
+  - property: file.name
+    direction: ASC
+- type: table
+  name: By category
+  order:
+  - file.name
+  - area
+  - projects
+  groupBy:
+    property: category
+    direction: ASC

@@ -1,0 +1,100 @@
+# Embed in a person note. Self includes tasks with no assignee. Management/review tabs are optional and do not infer a relationship.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+views:
+- type: table
+  name: Open
+  filters:
+    and:
+    - file.hasTag("task")
+    - list(assignee).contains(this.file.asLink()) || (this.relationship == "self" && assignee.isEmpty())
+    - status != "done" && status != "dropped"
+  order:
+  - file.name
+  - area
+  - status
+  - priority
+  - due
+  sort:
+  - property: priority
+    direction: ASC
+  - property: due
+    direction: ASC
+- type: table
+  name: Done last 30 days
+  filters:
+    and:
+    - file.hasTag("task")
+    - list(assignee).contains(this.file.asLink()) || (this.relationship == "self" && assignee.isEmpty())
+    - recurrence.isEmpty()
+    - status == "done"
+    - '!completedDate.isEmpty()'
+    - date(completedDate) >= today() - "29d"
+    - date(completedDate) < today() + "1d"
+  order:
+  - file.name
+  - area
+  - completedDate
+  sort:
+  - property: completedDate
+    direction: DESC
+- type: table
+  name: Meetings
+  filters:
+    and:
+    - file.hasTag("meeting")
+    - list(attendees).contains(this.file.asLink())
+  order:
+  - file.name
+  - note.date
+  - area
+  - projects
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: Direct reports
+  filters:
+    and:
+    - file.hasTag("person")
+    - if(this.relationship == "self", relationship == "report", manager == this.file.asLink())
+    - status.isEmpty() || status == "current"
+  order:
+  - file.name
+  - title
+  - team
+- type: table
+  name: Reviews
+  filters:
+    and:
+    - file.hasTag("review")
+    - person == this.file.asLink()
+    - '!file.hasTag("task")'
+  order:
+  - file.name
+  - kind
+  - status
+  - from
+  - to
+  sort:
+  - property: to
+    direction: DESC
+- type: table
+  name: Requested open
+  filters:
+    and:
+    - file.hasTag("task")
+    - status != "done" && status != "dropped"
+    - list(requester).contains(this.file.asLink())
+  order:
+  - file.name
+  - area
+  - status
+  - due
+  - assignee
+  - projects
+  sort:
+  - property: due
+    direction: ASC

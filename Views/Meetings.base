@@ -1,0 +1,78 @@
+# Recent is past/today; Upcoming is after today. Series is for embedding in a series note.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("meeting")
+views:
+- type: table
+  name: Recent
+  filters:
+    and:
+    - '!note.date.isEmpty()'
+    - date(note.date) >= today() - "29d"
+    - date(note.date) < today() + "1d"
+  order:
+  - file.name
+  - area
+  - note.date
+  - series
+  - attendees
+  - projects
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: Upcoming
+  filters:
+    and:
+    - '!note.date.isEmpty()'
+    - date(note.date) >= today() + "1d"
+  order:
+  - file.name
+  - note.date
+  - area
+  - attendees
+  - projects
+  sort:
+  - property: note.date
+    direction: ASC
+- type: table
+  name: All
+  order:
+  - file.name
+  - note.date
+  - area
+  - attendees
+  - projects
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: By series
+  filters:
+    and:
+    - '!series.isEmpty()'
+  groupBy:
+    property: series
+    direction: ASC
+  order:
+  - file.name
+  - area
+  - note.date
+  sort:
+  - property: note.date
+    direction: DESC
+- type: table
+  name: Series
+  filters:
+    and:
+    - series == this.file.asLink()
+  order:
+  - file.name
+  - area
+  - note.date
+  - attendees
+  sort:
+  - property: note.date
+    direction: DESC

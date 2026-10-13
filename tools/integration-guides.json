@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "checked": "2026-10-11",
+  "providers": {
+    "jira": {
+      "title": "Jira API credentials",
+      "variants": [
+        {
+          "title": "Jira Cloud: scoped API token (preferred when permitted)",
+          "steps": [
+            {
+              "title": "Open Atlassian token settings",
+              "text": "Sign in with the account that can read your Jira projects. Choose Create API token with scopes. Use a name such as Fieldbook and an expiry appropriate for your organization.",
+              "links": [
+                {
+                  "label": "Atlassian API token settings",
+                  "url": "https://id.atlassian.com/manage-profile/security/api-tokens"
+                },
+                {
+                  "label": "Token creation instructions",
+                  "url": "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/"
+                }
+              ]
+            },
+            {
+              "title": "Select Jira read scopes",
+              "text": "Select Jira and read scopes for issue search, project listing and your profile. Where classic scopes are offered, use read:jira-work and read:jira-user. If your interface uses granular scopes, follow the endpoint scope lists or ask your administrator. Keep project access limited through your Jira account permissions.",
+              "links": [
+                {
+                  "label": "Jira scope definitions",
+                  "url": "https://developer.atlassian.com/cloud/jira/platform/scopes-for-oauth-2-3LO-and-forge-apps/"
+                },
+                {
+                  "label": "Issue search endpoint scopes",
+                  "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/"
+                },
+                {
+                  "label": "Project endpoint scopes",
+                  "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/"
+                },
+                {
+                  "label": "Profile endpoint scopes",
+                  "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-myself/"
+                }
+              ]
+            },
+            {
+              "title": "Get the correct API base",
+              "text": "Scoped tokens use https://api.atlassian.com/ex/jira/YOUR_CLOUD_ID as Fieldbook service URL. Obtain the cloud ID using Atlassian's linked instructions; it is not the project key. Keep your Atlassian email for the Cloud email field.",
+              "links": [
+                {
+                  "label": "Find the cloud ID",
+                  "url": "https://support.atlassian.com/jira/kb/retrieve-my-atlassian-sites-cloud-id/"
+                }
+              ]
+            },
+            {
+              "title": "Create and retain the token",
+              "text": "Create the token and retain it in your approved secret manager; it is shown only once. Note its expiry. If token creation or required scopes are unavailable, ask the Jira administrator for an approved credential.",
+              "links": [
+                {
+                  "label": "Manage or revoke the token",
+                  "url": "https://id.atlassian.com/manage-profile/security/api-tokens"
+                }
+              ]
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Choose flavor cloud, your Atlassian email, the scoped API base and a narrow project/JQL selection. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        },
+        {
+          "title": "Jira Cloud: existing unscoped token / compatibility route",
+          "steps": [
+            {
+              "title": "Check your organization policy",
+              "text": "Use this route only when your organization permits unscoped API tokens or has supplied one. It inherits the account's permissions; there is no read-only scope selector for this token type.",
+              "links": [
+                {
+                  "label": "Atlassian token choices",
+                  "url": "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/"
+                }
+              ]
+            },
+            {
+              "title": "Create the token",
+              "text": "In Atlassian token settings choose Create API token without scopes, name it Fieldbook and set an expiry. Copy the resulting token to your approved secret manager.",
+              "links": [
+                {
+                  "label": "Atlassian API token settings",
+                  "url": "https://id.atlassian.com/manage-profile/security/api-tokens"
+                }
+              ]
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Choose flavor cloud, your Atlassian email and your site URL such as https://your-site.atlassian.net. Fieldbook still performs only reads. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        },
+        {
+          "title": "Jira Data Center: personal access token",
+          "steps": [
+            {
+              "title": "Open your Jira profile",
+              "text": "Sign in to your own Jira server. Open your avatar, Profile, then Personal access tokens. This needs a supported Jira version and administrator permission to create tokens.",
+              "links": [
+                {
+                  "label": "Data Center token instructions",
+                  "url": "https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html"
+                }
+              ]
+            },
+            {
+              "title": "Create a token",
+              "text": "Choose Create token, name it Fieldbook and set an expiry. Retain the value in your approved secret manager. It inherits your account permissions; use an account with appropriate project read access.",
+              "links": []
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Choose flavor server and the HTTPS Jira instance URL, retaining any application context path. Cloud email is not needed for this bearer-token flow. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    },
+    "agility": {
+      "title": "Digital.ai Agility access token",
+      "variants": [
+        {
+          "title": "Agility application and access-token grant",
+          "steps": [
+            {
+              "title": "Open Applications",
+              "text": "Sign in to your Agility instance. Open the profile menu and Applications. Choose an approved Public application, or create a Personal application named Fieldbook if your policy allows it.",
+              "links": [
+                {
+                  "label": "Application access instructions",
+                  "url": "https://docs.digital.ai/agility/docs/agility/authorizing-external-application-access"
+                }
+              ]
+            },
+            {
+              "title": "Create an Access Token grant",
+              "text": "For that application, create an authentication grant of type Access Token and copy its bearer token. Ask your administrator if only OAuth2 registration is available. Fieldbook accepts an access token, not an OAuth2 JSON file or an app client secret.",
+              "links": [
+                {
+                  "label": "Access-token authentication",
+                  "url": "https://docs.digital.ai/agility/docs/developerlibrary/access-token-authentication"
+                }
+              ]
+            },
+            {
+              "title": "Check project membership",
+              "text": "The grant acts with your Agility roles and project memberships; do not assume it has a read-only checkbox. Confirm you can view the intended project. Personal applications may be disabled by policy; request an approved public application if necessary.",
+              "links": []
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Use the HTTPS Agility instance root including its application path, without query.v1 or rest-1.v1. Select the project Scope in Fieldbook; member ID is optional for additional filtering. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    },
+    "github": {
+      "title": "GitHub Issues personal access token",
+      "variants": [
+        {
+          "title": "Fine-grained personal access token",
+          "steps": [
+            {
+              "title": "Open token settings",
+              "text": "For GitHub.com, open the token page below or Settings > Developer settings > Personal access tokens > Fine-grained tokens. For GitHub Enterprise, use your enterprise host's equivalent settings.",
+              "links": [
+                {
+                  "label": "Create a fine-grained token",
+                  "url": "https://github.com/settings/personal-access-tokens/new"
+                },
+                {
+                  "label": "GitHub token instructions",
+                  "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
+                }
+              ]
+            },
+            {
+              "title": "Choose owner, repositories and expiry",
+              "text": "Name the token Fieldbook, set an expiry, choose the resource owner and select only the repositories you need. Use separate Fieldbook connections/tokens for different resource owners. Organization approval may be required.",
+              "links": []
+            },
+            {
+              "title": "Select read permissions",
+              "text": "Under repository permissions, set Issues to Read-only; Metadata read is included. Leave write/admin permissions unselected. This is GitHub Issues, not GitHub Projects boards. Check organization approval if private repositories remain inaccessible.",
+              "links": [
+                {
+                  "label": "Issue endpoint permissions",
+                  "url": "https://docs.github.com/en/rest/issues/issues#list-repository-issues"
+                }
+              ]
+            },
+            {
+              "title": "Generate the token",
+              "text": "Generate it and retain the one-time value in your approved secret manager. If fine-grained access cannot cover your repository relationship, ask for an organization-approved alternative rather than broadening access automatically.",
+              "links": []
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Use https://api.github.com for GitHub.com, or your administrator's Enterprise API base. Select exact owner/repository names. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    },
+    "azure": {
+      "title": "Azure Boards personal access token",
+      "variants": [
+        {
+          "title": "Organization-scoped Azure DevOps PAT",
+          "steps": [
+            {
+              "title": "Open Azure DevOps token settings",
+              "text": "Sign in to your Azure DevOps organization. Open User settings > Personal access tokens > New Token. Name it Fieldbook, choose the specific organization and set an expiry.",
+              "links": [
+                {
+                  "label": "Azure DevOps PAT instructions",
+                  "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops"
+                }
+              ]
+            },
+            {
+              "title": "Select read scopes",
+              "text": "Choose Work Items: Read (vso.work). For the project picker, also choose Project and Team: Read (vso.project). Avoid Full access. A project-list permission failure is separate from work-item read access; a known project can be entered manually.",
+              "links": [
+                {
+                  "label": "Work-item query permissions",
+                  "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/wit/wiql/query-by-wiql?view=azure-devops-rest-7.1"
+                },
+                {
+                  "label": "Project-list permissions",
+                  "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/core/projects/list?view=azure-devops-rest-7.1"
+                }
+              ]
+            },
+            {
+              "title": "Create and retain the PAT",
+              "text": "Create the token and retain its one-time value in your approved secret manager. If PAT creation or these scopes are blocked, ask your organization administrator. This Boards adapter uses PATs; Microsoft calendar app registration does not configure Azure Boards.",
+              "links": []
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Use https://dev.azure.com/YOUR_ORGANIZATION or an approved HTTPS Server collection root; then select a project. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    },
+    "canvas": {
+      "title": "Canvas LMS access token",
+      "variants": [
+        {
+          "title": "Your own account: permitted token setup",
+          "steps": [
+            {
+              "title": "Open your school Canvas settings",
+              "text": "Sign in to the exact institution Canvas site. Open Account/Profile settings and find Approved Integrations or the access-token section. Institutions may hide or restrict token creation.",
+              "links": [
+                {
+                  "label": "Canvas token instructions",
+                  "url": "https://developerdocs.instructure.com/services/canvas/oauth2/file.oauth#manual-token-generation"
+                }
+              ]
+            },
+            {
+              "title": "Create a personal test token if permitted",
+              "text": "For your own account/testing, use the New Access Token control, label it Fieldbook and set an expiry if offered. Retain the one-time value in your approved secret manager. A personal token acts with your account access; this UI may not offer read-only scopes.",
+              "links": []
+            },
+            {
+              "title": "If a school requires an app registration",
+              "text": "Ask the Canvas administrator for an institution-approved integration. Multi-user applications require the Canvas OAuth flow and an institution developer key. Fieldbook currently accepts an existing approved access token; it does not implement Canvas OAuth sign-in/refresh or accept developer-key JSON.",
+              "links": [
+                {
+                  "label": "Canvas OAuth and developer-key requirements",
+                  "url": "https://developerdocs.instructure.com/services/canvas/oauth2/file.oauth#oauth2-flow-0"
+                }
+              ]
+            },
+            {
+              "title": "Check the read scopes with your institution",
+              "text": "A scoped integration needs GET access to courses, course assignments (including checkpoint dates), course quizzes, course discussion_topics, planner/items, announcements and calendar_events. The CLI also probes users/self/profile for authentication. It never requests write routes, quiz questions/attempts or discussion replies. Run the saved connection test and inspect each endpoint; older Canvas versions may omit checkpoint data even when reads succeed.",
+              "links": [
+                {
+                  "label": "Canvas read endpoints and scopes",
+                  "url": "https://developerdocs.instructure.com/services/canvas/resources/planner"
+                }
+              ]
+            },
+            {
+              "title": "Return to Fieldbook",
+              "text": "Use the institution HTTPS origin without /api/v1. Create separate connections for different schools, select course IDs and link each Course. School setup is needed to enable the AI feature; connection testing can run first. In the guided setup menu: 2 configure, 3 save, 5 choose scope, 3 save, 6 test read access. Choose OS credential storage to paste the token only into the hidden Save prompt, or supply an environment-variable name. Never enter a token at this guide prompt.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    },
+    "google": {
+      "title": "Google Calendar app registration",
+      "variants": [
+        {
+          "title": "Desktop OAuth application",
+          "steps": [
+            {
+              "title": "Enable the Calendar API",
+              "text": "Open your Google Cloud project or create an approved one, then enable Google Calendar API. Use the Google account whose calendar you will read; a Gmail account uses Google Calendar for this integration.",
+              "links": [
+                {
+                  "label": "Calendar API in Google Cloud",
+                  "url": "https://console.cloud.google.com/apis/library/calendar-json.googleapis.com"
+                },
+                {
+                  "label": "Enable Workspace APIs",
+                  "url": "https://developers.google.com/workspace/guides/enable-apis"
+                }
+              ]
+            },
+            {
+              "title": "Set the consent audience",
+              "text": "In Google Auth platform, configure Branding and Audience. Use Internal only where your Workspace organization permits it. For an External app in Testing, add your account as a test user. Follow organization policy if publishing/verification or approval is required.",
+              "links": [
+                {
+                  "label": "Consent screen instructions",
+                  "url": "https://developers.google.com/workspace/guides/configure-oauth-consent"
+                },
+                {
+                  "label": "Google Auth platform",
+                  "url": "https://console.cloud.google.com/auth/overview"
+                }
+              ]
+            },
+            {
+              "title": "Create the Desktop client",
+              "text": "Under Clients, create an OAuth client of type Desktop app. Retain its client ID and client secret. The client ID goes in Fieldbook configuration; the secret belongs in your approved secret manager until Fieldbook's hidden Sign in prompt. Do not save downloaded credential JSON inside the vault.",
+              "links": [
+                {
+                  "label": "Create Desktop credentials",
+                  "url": "https://developers.google.com/workspace/guides/create-credentials#desktop-app"
+                },
+                {
+                  "label": "Google OAuth clients",
+                  "url": "https://console.cloud.google.com/auth/clients"
+                }
+              ]
+            },
+            {
+              "title": "Use calendar read scopes",
+              "text": "Fieldbook requests calendar.events.readonly and calendar.calendarlist.readonly. If you configure Data Access scopes, use those two Google Calendar scopes. No Gmail mail scope is needed. External apps in Testing may require signing in again after refresh-token expiry.",
+              "links": [
+                {
+                  "label": "Calendar scopes",
+                  "url": "https://developers.google.com/workspace/calendar/api/auth"
+                },
+                {
+                  "label": "Token expiration details",
+                  "url": "https://developers.google.com/identity/protocols/oauth2#expiration"
+                }
+              ]
+            },
+            {
+              "title": "Configure, sign in and test",
+              "text": "In guided setup choose 2: authMode oauth, the Desktop client ID and OS credential storage; then 3 Save. Choose 4 Sign in, enter the client secret in the hidden terminal prompt, and complete browser consent. Choose 5 calendars, 3 Save, 6 Test, then 7 to link a recurring Series. Install both notebook requirements files in the vault Python environment first.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    },
+    "microsoft": {
+      "title": "Microsoft 365 / Outlook.com app registration",
+      "variants": [
+        {
+          "title": "Public-client app with calendar read access",
+          "steps": [
+            {
+              "title": "Register an application",
+              "text": "Sign in to Microsoft Entra. Open App registrations > New registration. Name it Fieldbook and choose the account types you intend to use: your tenant, other permitted organizations, or personal Microsoft accounts as appropriate. Registration requires directory permission; an organization-approved app is also valid.",
+              "links": [
+                {
+                  "label": "Microsoft Entra portal",
+                  "url": "https://entra.microsoft.com/"
+                },
+                {
+                  "label": "Register an application",
+                  "url": "https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app"
+                }
+              ]
+            },
+            {
+              "title": "Enable public client flows",
+              "text": "Under Authentication, enable Allow public client flows for device-code sign-in. This flow does not need a redirect URI or client secret. Do not create an application secret for Fieldbook's Microsoft calendar connection.",
+              "links": [
+                {
+                  "label": "Desktop/public-client settings",
+                  "url": "https://learn.microsoft.com/en-us/entra/identity-platform/scenario-desktop-app-configuration"
+                }
+              ]
+            },
+            {
+              "title": "Use delegated calendar read access",
+              "text": "Under API permissions, select Microsoft Graph delegated Calendars.Read. Fieldbook also requests offline_access during sign-in. Application permissions, Calendars.ReadWrite, mail and contact scopes are unnecessary. Remove unused default User.Read if present in this dedicated app; seek admin consent only if your tenant requires it.",
+              "links": [
+                {
+                  "label": "Calendars.Read permission",
+                  "url": "https://learn.microsoft.com/en-us/graph/permissions-reference#calendarsread"
+                },
+                {
+                  "label": "Device-code flow",
+                  "url": "https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-device-code"
+                }
+              ]
+            },
+            {
+              "title": "Copy the non-secret application details",
+              "text": "Record Application (client) ID, not Object ID. Use your Directory (tenant) ID for a work/school tenant; common or consumers may fit a permitted personal-account registration. Confirm the registered account types match. Keep a separate Fieldbook instance ID for each account.",
+              "links": []
+            },
+            {
+              "title": "Configure, sign in and test",
+              "text": "In guided setup choose 2: authMode oauth, client ID, tenant and OS credential storage; then 3 Save. Choose 4 Sign in and complete the displayed device-code flow yourself. Choose 5 calendars, 3 Save, 6 Test, then 7 to link a recurring Series. This reads Microsoft cloud calendars also displayed in Outlook; local-only Outlook uses ICS. Install both notebook requirements files first.",
+              "links": []
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

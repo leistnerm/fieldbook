@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "setups": [],
+  "workRole": "individual-contributor",
+  "features": {
+    "jira": false,
+    "reviews": false,
+    "autoPeople": false,
+    "autoCommit": false,
+    "agility": false,
+    "github": false,
+    "azure": false,
+    "canvas": false,
+    "google": false,
+    "microsoft": false
+  },
+  "defaults": {
+    "area": "",
+    "status": "backlog",
+    "priority": "2-normal",
+    "type": "task"
+  },
+  "workFocus": [],
+  "workSubrole": ""
+}

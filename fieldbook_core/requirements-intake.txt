@@ -1,0 +1,2 @@
+# Optional PDF text extraction; image OCR separately needs local Tesseract.
+pypdf==6.20.1

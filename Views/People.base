@@ -1,0 +1,119 @@
+# Directory is shared. Company, Supports, My team, birthdays and employment anniversaries are optional tabs, not required contact fields.
+filters:
+  and:
+  - file.ext == "md"
+  - '!file.inFolder("Templates") && !file.inFolder("Examples")'
+  - file.hasTag("person")
+formulas:
+  birthdayDay: if(birthday.isEmpty(), null, date(birthday).day)
+  hireDay: if(hireDate.isEmpty(), null, date(hireDate).day)
+  yearsAtCompany: if(hireDate.isEmpty(), null, today().year - date(hireDate).year - if(today().month < date(hireDate).month
+    || (today().month == date(hireDate).month && today().day < date(hireDate).day), 1, 0))
+  contactEmails: if(emails.isEmpty(), workEmail, emails)
+  contactPhones: if(phones.isEmpty(), if(workPhone.isEmpty(), workMobile, workPhone), phones)
+views:
+- type: table
+  name: Directory
+  filters:
+    and:
+    - status != "former"
+  groupBy:
+    property: relationship
+    direction: ASC
+  order:
+  - file.name
+  - relationship
+  - formula.contactEmails
+  - formula.contactPhones
+  sort:
+  - property: file.name
+    direction: ASC
+- type: table
+  name: By company
+  filters:
+    and:
+    - status != "former"
+    - '!company.isEmpty()'
+  groupBy:
+    property: company
+    direction: ASC
+  order:
+  - file.name
+  - title
+  - team
+  - relationship
+  - formula.contactEmails
+  - formula.contactPhones
+- type: table
+  name: Supports
+  filters:
+    and:
+    - status != "former"
+    - '!supports.isEmpty()'
+  order:
+  - file.name
+  - supports
+  - team
+  - workEmail
+  - workMobile
+  sort:
+  - property: file.name
+    direction: ASC
+- type: table
+  name: My team
+  filters:
+    and:
+    - status.isEmpty() || status == "current"
+    - relationship == "report"
+  order:
+  - file.name
+  - title
+  - team
+  - formula.contactEmails
+- type: table
+  name: Birthdays this month
+  filters:
+    and:
+    - status != "former"
+    - '!birthday.isEmpty()'
+    - date(birthday).month == today().month
+  order:
+  - file.name
+  - birthday
+  - relationship
+  sort:
+  - property: formula.birthdayDay
+    direction: ASC
+- type: table
+  name: Anniversaries this month
+  filters:
+    and:
+    - status != "former"
+    - '!hireDate.isEmpty()'
+    - date(hireDate).month == today().month
+    - date(hireDate) <= today()
+  order:
+  - file.name
+  - hireDate
+  - formula.yearsAtCompany
+  - team
+  sort:
+  - property: formula.hireDay
+    direction: ASC
+- type: table
+  name: Former
+  filters:
+    and:
+    - status == "former"
+  order:
+  - file.name
+  - relationship
+  - formula.contactEmails
+  - formula.contactPhones
+properties:
+  formula.contactEmails:
+    displayName: Email
+  formula.contactPhones:
+    displayName: Phone
+  formula.yearsAtCompany:
+    displayName: Completed years
